@@ -16,7 +16,8 @@
                 @foreach($sidebar as $iMenu)
                     @if(in_array(Auth::user()->role, explode(',', $iMenu->show)))
                         <li class="nav-item @if(in_array($iMenu->route, explode('.', $uri))) active open @endif">
-                            <a @if(isset($iMenu->child) && $iMenu->child) href="javascript:;" @else href="{{ route($iMenu->route) }}" @endif class="nav-link nav-toggle">
+                            <a @if(isset($iMenu->child) && $iMenu->child) href="javascript:;"
+                               @else href="{{ route($iMenu->route) }}" @endif class="nav-link nav-toggle">
                                 <i class="{{ $iMenu->icon }}"></i>
                                 <span class="title">{{ $iMenu->label }}</span>
                                 @if(in_array($iMenu->route, explode('.', $uri)))
@@ -30,7 +31,8 @@
                                     @foreach($iMenu->child as $iSubMenu)
                                         @if(in_array(Auth::user()->role, explode(',', $iSubMenu->show)))
                                             <li class="nav-item @if($iSubMenu->route == $uri) active open @endif">
-                                                <a href="@if(Route::has($iSubMenu->route)) {{ route($iSubMenu->route) }} @endif" class="nav-link">
+                                                <a href="@if(Route::has($iSubMenu->route)) {{ route($iSubMenu->route) }} @endif"
+                                                   class="nav-link">
                                                     @if($iSubMenu->icon)
                                                         <i class="{{ $iSubMenu->icon }}"></i>
                                                     @endif
