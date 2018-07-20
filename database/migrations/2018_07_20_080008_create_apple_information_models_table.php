@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreateAppleInformationModelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('apple_information_models', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('name')->nullable();
-            $table->string('username', 191)->unique();
-            $table->string('password');
-            $table->boolean('role')->comment('1.administrator 2.support');
-            $table->rememberToken();
+            $table->string('model');
+            $table->integer('iphone_information_id')->unsigned();
+            $table->foreign('iphone_information_id')->references('id')->on('iphone_informations')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('apple_information_models');
     }
 }

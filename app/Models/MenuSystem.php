@@ -9,4 +9,8 @@ class MenuSystem extends \Eloquent
     protected $table = 'menu_system';
 
     public $timestamps = false;
+
+    public function childrens() {
+        return $this->hasMany('App\Models\MenuSystem', 'parent_id');
+    }
 }

@@ -14,7 +14,6 @@ class ViewComposerServiceProvider extends ServiceProvider {
 	 */
 	public function boot() {
 		$this->composeSidebarBackend();
-		$this->composeBreadcumbs();
 		View::share('detect', new Agent());
 	}
 
@@ -29,9 +28,5 @@ class ViewComposerServiceProvider extends ServiceProvider {
 
 	private function composeSidebarBackend() {
 		View::composer( 'backend.layouts.sidebar', 'App\Http\ViewComposers\SidebarComposer' );
-	}
-
-	private function composeBreadcumbs() {
-		View::composer( 'layouts.breadcumbs', 'App\Http\ViewComposers\BreadcumbComposer' );
 	}
 }

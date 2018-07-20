@@ -18,11 +18,14 @@ class SidebarComposer
 
     public function compose(View $view)
     {
-        $menuSystem = DB::table('menu_system')->where('status', '=', 1)->get()->toArray();
+        $menuSystem = MenuSystem::where('status', '1')->orderBy('order')->get();
+
         $sidebar = setMultiMenu($menuSystem);
+
         $route = Route::current()->getAction();
 
         $view->with('sidebar', $sidebar);
-        $view->with('uri', $route['as']);
+
+        $view->with('routeName', $route['as']);
     }
 }
