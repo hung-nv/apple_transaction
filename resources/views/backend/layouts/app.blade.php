@@ -25,7 +25,15 @@
 <div class="page-container">
 
     @include('backend.layouts.sidebar')
-    @yield('content')
+
+    <div class="page-content-wrapper">
+        <div class="page-content">
+
+            @include('backend.layouts.breadcrumbs')
+
+            @yield('content')
+        </div>
+    </div>
 
 </div>
 

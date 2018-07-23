@@ -64,10 +64,20 @@ class AppleController extends Controller {
 		}
 	}
 
-	public function insert() {
+	/**
+	 * Create id apple
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function create() {
 		return view( 'backend.apple.create' );
 	}
 
+	/**
+	 * Store id apples
+	 * @param Request $request
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function store( Request $request ) {
 		$content = trim( $request->apple_ids );
 		$content = explode( "\n", $content );

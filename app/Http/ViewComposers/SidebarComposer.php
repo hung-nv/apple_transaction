@@ -18,7 +18,7 @@ class SidebarComposer
 
     public function compose(View $view)
     {
-        $menuSystem = MenuSystem::where('status', '1')->orderBy('order')->get();
+        $menuSystem = MenuSystem::where('status', '1')->orderBy('sort')->get();
 
         $sidebar = setMultiMenu($menuSystem);
 

@@ -24,8 +24,21 @@ Route::group(['prefix' => 'administrator', 'namespace' => 'Backend'], function (
 Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' => 'Backend'], function () {
     Route::group(['middleware' => 'checkrole:1|2'], function () {
         Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'AdminSiteController@index']);
+
+        // update account information
         Route::get('user/update-account', ['as' => 'user.updateAccount', 'uses' => 'UserController@updateAccount']);
         Route::put('user/update-account', ['as' => 'user.putUpdateAccount', 'uses' => 'UserController@account']);
+
+        // route for id apples
+	    Route::resource('apple', 'AppleController');
+
+	    // route for credit card
+	    Route::resource('creditCard', 'CreditCardController');
+
+	    // route for serial
+	    Route::resource('serial', 'SerialController');
+
+	    Route::resource('iphoneInformation', 'IphoneInformationController');
     });
 
     Route::group(['middleware' => 'checkrole:1'], function () {
