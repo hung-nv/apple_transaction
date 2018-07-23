@@ -16,11 +16,12 @@
         </div>
     </div>
 
+    @php($models = isset($data) ? $data->iphoneInformationModels->implode('iphone_model', ', ') : old('models'))
     <div class="form-group last">
         <label class="control-label col-md-3">Models</label>
         <div class="col-md-9">
             <textarea name="models" class="form-control" rows="10"
-                      required>{{ $data['models'] or old('models') }}</textarea>
+                      required>{{ $models }}</textarea>
         </div>
     </div>
 

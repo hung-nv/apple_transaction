@@ -4,6 +4,10 @@
     Manage Iphone Information
 @endsection
 
+@section('breadcrumbs')
+    <a href="{{ route('iphoneInformation.index') }}">Iphone Informations</a>
+@endsection
+
 @section('content')
     <h3 class="page-title"> Iphone Information
         <small>All</small>
@@ -25,26 +29,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a class="btn sbold green" href="#"> Download
+                                    <a class="btn sbold green" href="{{ route('iphoneInformation.create') }}"> Insert
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 pull-right text-right">
-                                <a class="btn sbold red" href="#"
+                            <div class="col-md-6 pull-right text-right hidden">
+                                <a class="btn sbold red" href="{{ route('iphoneInformation.deleteAll') }}"
                                    onclick="return confirm('Do you want to delete all?');"> Delete All
                                 </a>
                             </div>
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                           id="data-apple">
+                           id="data-iphoneInformation">
                         <thead>
                         <tr>
                             <th> ID</th>
                             <th> Internal Name</th>
                             <th> Identify</th>
-                            <th> Models</th>
+                            <th style="width: 50%;"> Models</th>
                             <th> Actions</th>
                         </tr>
                         </thead>
@@ -57,12 +61,14 @@
                                     <td> {{ $i->id }}</td>
                                     <td>{{ $i->internal_name }}</td>
                                     <td>{{ $i->identify }}</td>
-                                    <td>{{ $i->iphoneInformationModels->implode('model', ',') }}</td>
+                                    <td>{{ $i->iphoneInformationModels->implode('iphone_model', ', ') }}</td>
                                     <td>
-                                        <form action="{{ route('iphoneInformation.destroy', $i->id) }}" method="POST">
+                                        <form action="{{ route('iphoneInformation.destroy', ['iphoneInformation' => $i->id]) }}" method="POST">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn red btn-sm btn-delete">Delete</button>
+                                            <a href="{{ route('iphoneInformation.edit', ['iphoneInformation' => $i->id]) }}"
+                                               class="btn red btn-sm">Update</a>
+                                            <button type="button" class="btn red btn-sm btn-delete">Delete</button>
                                         </form>
                                     </td>
                                 </tr>
@@ -78,3 +84,11 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script type="text/javascript">
+        $(function () {
+            confirmBeforeDelete('#data-iphoneInformation', 'Do you want to delete this?');
+        });
+    </script>
+@endpush

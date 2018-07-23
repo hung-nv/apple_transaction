@@ -19,16 +19,18 @@ class CreateIdApplePurchasesTable extends Migration
 
             $table->string('id_device');
 
+            $table->string('imei');
+            $table->string('language');
+
             $table->integer('apple_id')->unsigned();
             $table->foreign('apple_id')->references('id')->on('apples');
-
-            $table->integer('credit_card_id')->unsigned();
-            $table->foreign('credit_card_id')->references('id')->on('credit_cards');
 
             $table->integer('serial_id')->unsigned();
             $table->foreign('serial_id')->references('id')->on('serials');
 
-            $table->tinyInteger('total_try_purchase')->default(0);
+            $table->tinyInteger('total_purchase_successful')->nullable();
+            $table->tinyInteger('total_puchase_fail')->nullable();
+            $table->integer('money_purchased')->nullable();
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');

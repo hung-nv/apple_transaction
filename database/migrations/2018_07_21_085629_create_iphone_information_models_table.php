@@ -16,7 +16,7 @@ class CreateIphoneInformationModelsTable extends Migration
         Schema::create('iphone_information_models', function (Blueprint $table) {
 	        $table->engine = 'InnoDB';
 	        $table->increments('id');
-	        $table->string('model');
+	        $table->string('iphone_model');
 	        $table->integer('iphone_information_id')->unsigned();
 	        $table->foreign('iphone_information_id')->references('id')->on('iphone_informations')->onDelete('cascade');
 	        $table->timestamps();

@@ -13,7 +13,16 @@ class Apple extends \Eloquent
 	/**
 	 * @var array list attribute can insert to table apples.
 	 */
-    protected $fillable = ['email', 'password', 'iphone_internal_name', 'iphone_identify', 'iphone_model', 'user_id'];
+    protected $fillable = [
+        'email',
+        'password',
+        'iphone_internal_name',
+        'iphone_identify',
+        'iphone_model',
+        'total_fail',
+        'user_id',
+        'is_used'
+    ];
 
 	/**
 	 * Define relationship belongs to.

@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="author"/>
-    <meta name="_token" content="{!! csrf_token() !!}" />
+    <meta name="_token" content="{!! csrf_token() !!}"/>
     <link rel="shortcut icon" href="{{ asset('/admin/images/favicon.ico') }}"/>
 
     @include('backend.layouts.css.core')
@@ -46,13 +46,12 @@
 </div>
 @include('backend.layouts.js.core')
 
-@yield('footer')
-
 @include('backend.layouts.js.global')
 
-@yield('script')
+@stack('script')
 
 @include('backend.layouts.js.layouts')
+
 </body>
 
 </html>

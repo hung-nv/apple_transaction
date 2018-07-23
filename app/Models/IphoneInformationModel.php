@@ -8,7 +8,7 @@ class IphoneInformationModel extends Model
 {
     protected $table = 'iphone_information_models';
 
-    protected $fillable = ['model'];
+    protected $fillable = ['iphone_model'];
 
     public function iphoneInformation()
     {

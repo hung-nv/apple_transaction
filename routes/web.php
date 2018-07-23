@@ -31,6 +31,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
 
         // route for id apples
 	    Route::resource('apple', 'AppleController');
+        Route::get('apple/deleteAll', ['as' => 'apple.deleteAll', 'uses' => 'AppleController@deleteAll'] );
 
 	    // route for credit card
 	    Route::resource('creditCard', 'CreditCardController');
@@ -39,6 +40,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
 	    Route::resource('serial', 'SerialController');
 
 	    Route::resource('iphoneInformation', 'IphoneInformationController');
+	    Route::get('iphoneInformation/deleteAll', ['as' => 'iphoneInformation.deleteAll', 'uses' => 'IphoneInformationController@deleteAll'] );
     });
 
     Route::group(['middleware' => 'checkrole:1'], function () {

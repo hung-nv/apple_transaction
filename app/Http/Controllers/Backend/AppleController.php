@@ -2,98 +2,87 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Http\Requests\IdAppleStore;
 use App\Models\Apple;
-use App\Models\User;
+use App\Services\IdAppleServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Response;
 
-class AppleController extends Controller {
-	public function download() {
-		$dataStorage = Apple::select( 'apple_id' )->pluck( 'apple_id' )->toArray();
-		$dataStorage = implode( "\n", $dataStorage );
-		Storage::put( 'apples.txt', $dataStorage );
+class AppleController extends Controller
+{
 
-		return Response::download( storage_path( 'app/apples.txt' ) );
-	}
+    protected $idAppleServices;
 
-	public function deleteAll() {
-		Apple::truncate();
+    public function __construct(IdAppleServices $services)
+    {
+        parent::__construct();
+        $this->idAppleServices = $services;
+    }
 
-		return redirect()->route( 'apple.index' );
-	}
 
-	public function getFirstId() {
-		$apple = Apple::first();
-		if ( $apple ) {
-			echo $apple->apple_id;
-			$apple->delete();
-		} else {
-			echo 'Het hang';
-		}
-	}
+    public function download()
+    {
+        $dataStorage = Apple::select('apple_id')->pluck('apple_id')->toArray();
+        $dataStorage = implode("\n", $dataStorage);
+        Storage::put('apples.txt', $dataStorage);
 
-	public function index( Request $request ) {
-		$data = Apple::paginate( 20 );
+        return Response::download(storage_path('app/apples.txt'));
+    }
 
-		return view( 'backend.apple.index', [
-			'data' => $data
-		] );
-	}
+    public function deleteAll()
+    {
+        Apple::truncate();
 
-	public function destroy( $id ) {
-		$apple_id = Apple::findOrFail( $id );
-		if ( $apple_id->delete() ) {
-			Session::flash( 'success_message', 'This apple_id has been delete!' );
-		} else {
-			Session::flash( 'error_message', 'Fail to delete this apple_id' );
-		}
+        return redirect()->route('apple.index');
+    }
 
-		return redirect()->route( 'apple.index' );
-	}
+    /**
+     * List all id apples.
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        $idApples = Apple::orderByDesc('created_at')->paginate(20);
 
-	public function insertDirect( $id ) {
-		$apple = Apple::firstOrCreate( [ 'apple_id' => $id ] );
-		if ( $apple ) {
-			echo 'Insert ' . $id . ' thanh cong.';
-		} else {
-			echo 'Fail';
-		}
-	}
+        return view('backend.apple.index', [
+            'data' => $idApples
+        ]);
+    }
 
-	/**
-	 * Create id apple
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-	 */
-	public function create() {
-		return view( 'backend.apple.create' );
-	}
+    public function destroy($id)
+    {
+        $apple_id = Apple::findOrFail($id);
+        if ($apple_id->delete()) {
+            Session::flash('success_message', 'This apple_id has been delete!');
+        } else {
+            Session::flash('error_message', 'Fail to delete this apple_id');
+        }
 
-	/**
-	 * Store id apples
-	 * @param Request $request
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function store( Request $request ) {
-		$content = trim( $request->apple_ids );
-		$content = explode( "\n", $content );
-		$content = array_filter( $content, 'trim' ); // remove any extra \r characters left behind
+        return redirect()->route('apple.index');
+    }
 
-		$count = 0;
-		foreach ( $content as $line ) {
-			if ( Apple::firstOrCreate( [ 'apple_id' => trim( $line ) ] ) ) {
-				$count ++;
-			}
-		}
+    /**
+     * Create id apple.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('backend.apple.create');
+    }
 
-		if ( $count > 0 ) {
-			Session::flash( 'success_message', 'Insert your apple ids successful' );
-		}
+    /**
+     * Store id apples.
+     * @param IdAppleStore $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(IdAppleStore $request)
+    {
+        $response = $this->idAppleServices->createIdApple($request->all());
 
-		return redirect()->route( 'apple.insert' );
-	}
+        return redirect()->route('apple.index')->with($response);
+    }
 }
