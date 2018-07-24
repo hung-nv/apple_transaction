@@ -1,8 +1,8 @@
 @extends('backend.layouts.app')
 
-@section('title')
-    Manage ID Apple
-@endsection
+@section('title', 'Manage ID Apple')
+
+@section('pageId', 'idApple')
 
 @section('breadcrumbs')
     <a href="{{ route('apple.index') }}">Apples</a>
@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a class="btn sbold green" id="create-id-apple">
+                                    <a class="btn sbold green" id="create-id-apple" v-on:click="createIdApple">
                                         Insert
                                         <i class="fa fa-plus"></i>
                                     </a>
@@ -98,12 +98,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script type="text/javascript" src="{{ asset('admin/assets/pages/id-apples.js') }}"></script>
-    <script type="text/javascript">
-        $(function () {
-            confirmBeforeDelete('#data-apple', 'Do you want to delete this?');
-        });
-    </script>
-@endpush

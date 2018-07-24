@@ -22,7 +22,7 @@
 
 <div class="clearfix"></div>
 
-<div class="page-container">
+<div class="page-container mainComponent" id="@yield('pageId')">
 
     @include('backend.layouts.sidebar')
 

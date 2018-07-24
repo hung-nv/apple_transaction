@@ -18,24 +18,3 @@ function pageDatatable(idSelected) {
         bFilter: true
     });
 }
-
-function confirmBeforeDelete(idWrapSelected, message) {
-    if(message === undefined || message === null) {
-        message = '';
-    }
-    $(idWrapSelected).on('click', '.btn-delete', function () {
-        var self = $(this);
-        swal({
-            title: 'Are you sure?',
-            text: message,
-            type: 'warning',
-            showCancelButton: true,
-            customClass: 'nvh-dialog',
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then(function () {
-            self.parent().submit();
-        });
-    });
-}
