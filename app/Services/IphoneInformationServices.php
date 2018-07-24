@@ -179,9 +179,36 @@ class IphoneInformationServices
     {
         $iphoneInformation = $this->getIphoneInformationById($id);
 
-        if($iphoneInformation) {
+        if ($iphoneInformation) {
             $iphoneInformation->iphoneInformationModels()->delete();
             $iphoneInformation->delete();
         }
+    }
+
+    /**
+     * Check iphone information has data
+     * @return array
+     */
+    public function checkIphoneInformation()
+    {
+        $iphoneInformation = IphoneInformation::inRandomOrder()->first();
+
+        if ($iphoneInformation) {
+            $iphoneModelRandom = $iphoneInformation->iphoneInformationModels()->inRandomOrder()->first();
+        }
+
+        if(empty($iphoneModelRandom)) {
+            $responseJson = [
+                'url' => route('iphoneInformation.create'),
+                'message' => 'You need create iPhone Information first.'
+            ];
+        } else {
+            $responseJson = [
+                'url' => route('apple.create'),
+                'message' => 'ok'
+            ];
+        }
+
+        return $responseJson;
     }
 }

@@ -15,7 +15,7 @@
 
     @include('backend.blocks.message')
 
-    <div class="row">
+    <div class="row" id="idApple">
         <div class="col-md-12">
             <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered">
@@ -30,7 +30,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a class="btn sbold green" href="{{ route('apple.create') }}"> Insert
+                                    <a class="btn sbold green" id="create-id-apple">
+                                        Insert
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
@@ -99,6 +100,7 @@
 @endsection
 
 @push('script')
+    <script type="text/javascript" src="{{ asset('admin/assets/pages/id-apples.js') }}"></script>
     <script type="text/javascript">
         $(function () {
             confirmBeforeDelete('#data-apple', 'Do you want to delete this?');

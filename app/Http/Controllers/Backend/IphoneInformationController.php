@@ -94,6 +94,22 @@ class IphoneInformationController extends Controller
     }
 
     /**
+     * Check exist iphone information
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function checkInformation()
+    {
+        try {
+            $response = $this->iphoneInformationServices->checkIphoneInformation();
+
+            return response()->json($response, 200);
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
+    }
+
+    /**
      * Delete iphone Information
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
