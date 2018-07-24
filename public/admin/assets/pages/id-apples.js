@@ -11,7 +11,7 @@ $(function () {
                 } else {
                     swal({
                         type: 'error',
-                        title: 'Oops...',
+                        title: 'Fail...',
                         html: 'You must <a href="' + respon.url + '">create iPhone Information</a> first.'
                     })
                 }
@@ -19,7 +19,7 @@ $(function () {
             }).fail(xhr => {
                 if (xhr.status === 402) {
                     // Auth error.
-                    return window.location.href = xhr.responseJSON;
+                    window.location.href = xhr.responseJSON;
                 } else if (xhr.responseJSON) {
                     // console.log(xhr)
                 } else {
