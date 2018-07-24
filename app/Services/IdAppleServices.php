@@ -70,4 +70,18 @@ class IdAppleServices
             'user_id' => $userId
         ]);
     }
+
+    /**
+     * Delete Id Apple
+     * @param int $id
+     * @throws \Exception
+     */
+    public function deleteIdApple($id)
+    {
+        try {
+            Apple::findOrFail($id)->delete();
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
+    }
 }

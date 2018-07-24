@@ -7,9 +7,6 @@ use App\Models\Apple;
 use App\Services\IdAppleServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;
 
 class AppleController extends Controller
 {
@@ -20,23 +17,6 @@ class AppleController extends Controller
     {
         parent::__construct();
         $this->idAppleServices = $services;
-    }
-
-
-    public function download()
-    {
-        $dataStorage = Apple::select('apple_id')->pluck('apple_id')->toArray();
-        $dataStorage = implode("\n", $dataStorage);
-        Storage::put('apples.txt', $dataStorage);
-
-        return Response::download(storage_path('app/apples.txt'));
-    }
-
-    public function deleteAll()
-    {
-        Apple::truncate();
-
-        return redirect()->route('apple.index');
     }
 
     /**
@@ -51,18 +31,6 @@ class AppleController extends Controller
         return view('backend.apple.index', [
             'data' => $idApples
         ]);
-    }
-
-    public function destroy($id)
-    {
-        $apple_id = Apple::findOrFail($id);
-        if ($apple_id->delete()) {
-            Session::flash('success_message', 'This apple_id has been delete!');
-        } else {
-            Session::flash('error_message', 'Fail to delete this apple_id');
-        }
-
-        return redirect()->route('apple.index');
     }
 
     /**
@@ -84,5 +52,28 @@ class AppleController extends Controller
         $response = $this->idAppleServices->createIdApple($request->all());
 
         return redirect()->route('apple.index')->with($response);
+    }
+
+    /**
+     * Delete id apple
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $this->idAppleServices->deleteIdApple($id);
+
+        return redirect()->route('apple.index')->with(['success_message' => 'Delete successful']);
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteAll()
+    {
+        Apple::truncate();
+
+        return redirect()->route('apple.index');
     }
 }
