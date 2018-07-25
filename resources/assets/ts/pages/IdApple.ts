@@ -2,23 +2,20 @@ import {confirmBeforeDelete} from '../utilities/common/helpers';
 
 declare var $;
 declare var _;
-declare var viewData;
 declare var swal;
 
 // Declare variable.
-let planData = [];
+let selectedIdApple = [];
 
 /**
  * List Elements of view.
  * @type any
  */
-const ui = {
-    'inputCalender': '.m-inputCalenderIndex',
-};
+const ui = {};
 
 export default class idApple {
     public setUp() {
-        confirmBeforeDelete('Do you want to delete this?');
+
     }
 
     public createIdApple() {
@@ -50,5 +47,22 @@ export default class idApple {
                 });
             }
         });
+    }
+
+    public confirmDelete(event) {
+        confirmBeforeDelete(event.target, 'Do you want to delete this?');
+    }
+
+    public selectIdApple(event) {
+        let element = $(event.target);
+        if(element.is(':checked')) {
+            selectedIdApple.push(element.data('id'));
+        } else {
+            selectedIdApple.splice($.inArray(element.data('id'), selectedIdApple),1);
+        }
+    }
+
+    public selectAll() {
+
     }
 }

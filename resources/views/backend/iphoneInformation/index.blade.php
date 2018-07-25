@@ -84,11 +84,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script type="text/javascript">
-        $(function () {
-            confirmBeforeDelete('#data-iphoneInformation', 'Do you want to delete this?');
-        });
-    </script>
-@endpush

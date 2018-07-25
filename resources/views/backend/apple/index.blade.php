@@ -47,7 +47,7 @@
                            id="data-apple">
                         <thead>
                         <tr>
-                            <th> ID</th>
+                            <th width="8%"> <input type="checkbox" v-on:click="selectAll" > All </th>
                             <th> Apple ID</th>
                             <th> Password</th>
                             <th> iPhone Internal Name</th>
@@ -64,7 +64,7 @@
                             @foreach($data as $i)
 
                                 <tr class="odd gradeX">
-                                    <td>{{ $i->id }}</td>
+                                    <td><input type="checkbox" data-id="{{ $i->id }}" v-on:click="selectIdApple"></td>
                                     <td>{{ $i->email }}</td>
                                     <td>{{ $i->password }}</td>
                                     <td>{{ $i->iphone_internal_name }}</td>
@@ -82,7 +82,7 @@
                                         <form action="{{ route('apple.destroy', $i->id) }}" method="POST">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn red btn-sm btn-delete">Delete</button>
+                                            <button type="button" class="btn red btn-sm" v-on:click="confirmDelete">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

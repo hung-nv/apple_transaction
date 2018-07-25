@@ -21,7 +21,8 @@ class IdAppleServices
         $countIdApple = 0;
         foreach ($idApples as $line) {
             $arrayOfApple = explode('|', trim($line));
-            if (count($arrayOfApple) > 1 and filter_var($arrayOfApple[0], FILTER_VALIDATE_EMAIL)) {
+
+            if (count($arrayOfApple) > 1 && filter_var(trim($arrayOfApple[0]), FILTER_VALIDATE_EMAIL)) {
                 // get random iphone Information
                 $iphoneInformation = IphoneInformation::inRandomOrder()->first();
                 // get random iphone information model
@@ -29,8 +30,8 @@ class IdAppleServices
 
                 // create id apple
                 $idApple = $this->saveIdApple(
-                    $arrayOfApple[0],
-                    $arrayOfApple[1],
+                    trim($arrayOfApple[0]),
+                    trim($arrayOfApple[1]),
                     $iphoneInformation->internal_name,
                     $iphoneInformation->identify,
                     $iphoneModelRandom->iphone_model,

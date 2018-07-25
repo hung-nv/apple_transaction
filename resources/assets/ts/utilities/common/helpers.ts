@@ -2,9 +2,10 @@ declare var swal;
 
 /**
  * Alert before delete
+ * @param el
  * @param message
  */
-export function confirmBeforeDelete(message) {
+export function confirmBeforeDelete(el, message) {
     if (message === undefined || message === null) {
         message = '';
     }
@@ -18,6 +19,6 @@ export function confirmBeforeDelete(message) {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, delete it!'
     }).then(function () {
-        $(this).parent().submit();
+        $(el).parent().submit();
     });
 }
