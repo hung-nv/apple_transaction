@@ -1,15 +1,15 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Manage Iphone Information')
+@section('title', 'Manage Serial')
 
-@section('pageId', 'iPhoneInformation')
+@section('pageId', 'idApple')
 
 @section('breadcrumbs')
-    <a href="{{ route('iphoneInformation.index') }}">Iphone Informations</a>
+    <a href="{{ route('serial.index') }}">Serial</a>
 @endsection
 
 @section('content')
-    <h3 class="page-title"> Iphone Information
+    <h3 class="page-title"> Manage Serial
         <small>All</small>
     </h3>
 
@@ -17,6 +17,7 @@
 
     <div class="row">
         <div class="col-md-12">
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
             <div class="portlet light bordered">
                 <div class="portlet-title">
                     <div class="caption font-dark">
@@ -29,45 +30,58 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="btn-group">
-                                    <a class="btn sbold green" href="{{ route('iphoneInformation.create') }}"> Insert
+                                    <a class="btn sbold green" href="{{ route('serial.create') }}">
+                                        Insert
                                         <i class="fa fa-plus"></i>
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 pull-right text-right hidden">
-                                <a class="btn sbold red" href="{{ route('iphoneInformation.deleteAll') }}"
+                            <div class="col-md-6 pull-right text-right">
+                                <a class="btn sbold red" href="{{ route('serial.deleteAll') }}"
                                    onclick="return confirm('Do you want to delete all?');"> Delete All
                                 </a>
                             </div>
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                           id="data-iphoneInformation">
+                           id="data-apple">
                         <thead>
                         <tr>
-                            <th> ID</th>
-                            <th> Internal Name</th>
-                            <th> Identify</th>
-                            <th style="width: 50%;"> Models</th>
+                            <th > ID </th>
+                            <th> Apple ID</th>
+                            <th> Password</th>
+                            <th> iPhone Internal Name</th>
+                            <th> iPhone Identify</th>
+                            <th> iPhone Model</th>
+                            <th> Total add infor fail</th>
+                            <th> Used</th>
                             <th> Actions</th>
                         </tr>
                         </thead>
                         <tbody>
 
-                        @if(!empty($iphoneInformations))
-                            @foreach($iphoneInformations as $i)
+                        @if(!empty($data))
+                            @foreach($data as $i)
 
                                 <tr class="odd gradeX">
-                                    <td> {{ $i->id }}</td>
-                                    <td>{{ $i->internal_name }}</td>
-                                    <td>{{ $i->identify }}</td>
-                                    <td>{{ $i->iphoneInformationModels->implode('iphone_model', ', ') }}</td>
+                                    <td><input type="checkbox" data-id="{{ $i->id }}" v-on:click="selectIdApple"></td>
+                                    <td>{{ $i->email }}</td>
+                                    <td>{{ $i->password }}</td>
+                                    <td>{{ $i->iphone_internal_name }}</td>
+                                    <td>{{ $i->iphone_identify }}</td>
+                                    <td>{{ $i->iphone_model }}</td>
+                                    <td>{{ $i->total_fail }}</td>
                                     <td>
-                                        <form action="{{ route('iphoneInformation.destroy', ['iphoneInformation' => $i->id]) }}" method="POST">
+                                        @if($i->is_used === 0)
+                                            <span class="badge badge-info badge-roundless"> No </span>
+                                        @else
+                                            <span class="badge badge-default badge-roundless"> Yes </span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('apple.destroy', $i->id) }}" method="POST">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <a href="{{ route('iphoneInformation.edit', ['iphoneInformation' => $i->id]) }}"
-                                               class="btn red btn-sm">Update</a>
                                             <button type="button" class="btn red btn-sm" v-on:click="confirmDelete">Delete</button>
                                         </form>
                                     </td>
@@ -78,7 +92,7 @@
                         </tbody>
                     </table>
 
-                    {{ $iphoneInformations->links() }}
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

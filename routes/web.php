@@ -35,9 +35,11 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
 
 	    // route for credit card
 	    Route::resource('creditCard', 'CreditCardController');
+        Route::get('creditCard/deleteAll', ['as' => 'creditCard.deleteAll', 'uses' => 'CreditCardController@deleteAll'] );
 
 	    // route for serial
 	    Route::resource('serial', 'SerialController');
+        Route::get('serial/deleteAll', ['as' => 'serial.deleteAll', 'uses' => 'SerialController@deleteAll'] );
 
 	    Route::resource('iphoneInformation', 'IphoneInformationController');
 	    Route::get('iphoneInformation/deleteAll', ['as' => 'iphoneInformation.deleteAll', 'uses' => 'IphoneInformationController@deleteAll'] );

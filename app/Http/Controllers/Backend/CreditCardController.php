@@ -3,87 +3,75 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\CreditCard;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Response;
+use App\Services\CreditCardServices;
+use App\Http\Requests\CreditCardStore;
 
-class CreditCardController extends Controller {
-	public function download() {
-		$dataStorage = CreditCard::select( 'number' )->pluck( 'number' )->toArray();
-		$dataStorage = implode( "\n", $dataStorage );
-		Storage::put( 'creditcards.txt', $dataStorage );
+class CreditCardController extends Controller
+{
 
-		return Response::download( storage_path( 'app/creditcards.txt' ) );
-	}
+    protected $creditCardServices;
 
-	public function deleteAll() {
-		CreditCard::truncate();
+    public function __construct(CreditCardServices $creditCardServices)
+    {
+        $this->creditCardServices = $creditCardServices;
+    }
 
-		return redirect()->route( 'creditCard.index' );
-	}
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteAll()
+    {
+        $this->creditCardServices->deleteAll();
 
-	public function getFirstNumber() {
-		$credit = CreditCard::first();
-		if ( $credit ) {
-			echo $credit->number;
-			$credit->delete();
-		} else {
-			echo 'Het hang';
-		}
-	}
+        return redirect()->route('creditCard.index')->with(['success_message' => 'Delete all successful']);
+    }
 
-	public function create() {
-		return view( 'backend.creditcard.create' );
-	}
+    /**
+     * Create Credit Card
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function create()
+    {
+        return view('backend.creditCard.create');
+    }
 
-	public function insertDirect( $number ) {
-		if ( ! empty( $number ) ) {
-			$credit = CreditCard::create( [ 'number' => $number ] );
-			if ( $credit ) {
-				echo 'Insert ' . $number . ' thanh cong.';
-			} else {
-				echo 'Fail';
-			}
-		}
-	}
 
-	public function store( Request $request ) {
-		$content = trim( $request->credit_cards );
-		$content = explode( "\n", $content );
-		$content = array_filter( $content, 'trim' ); // remove any extra \r characters left behind
+    /**
+     * Store credit cards
+     * @param CreditCardStore $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(CreditCardStore $request)
+    {
+        $response = $this->creditCardServices->createCreditCards($request->all());
 
-		$count = 0;
-		foreach ( $content as $line ) {
-			if ( CreditCard::firstOrCreate( [ 'number' => trim( $line ) ] ) ) {
-				$count ++;
-			}
-		}
+        return redirect()->route('creditCard.index')->with($response);
+    }
 
-		if ( $count > 0 ) {
-			Session::flash( 'success_message', 'Insert your credit cards successful' );
-		}
+    /**
+     * List Credit Cards
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index()
+    {
+        $creditCards = $this->creditCardServices->getCreditCards();
 
-		return redirect()->route( 'creditCard.create' );
-	}
+        return view('backend.creditCard.index', [
+            'data' => $creditCards
+        ]);
+    }
 
-	public function index( Request $request ) {
-		$data = CreditCard::paginate( 20 );
+    /**
+     * Delete credit card.
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $this->creditCardServices->deleteCreditCard($id);
 
-		return view( 'backend.creditcard.index', [
-			'data' => $data
-		] );
-	}
-
-	public function destroy( $id ) {
-		$credit = CreditCard::findOrFail( $id );
-		if ( $credit->delete() ) {
-			Session::flash( 'success_message', 'This credit has been delete!' );
-		} else {
-			Session::flash( 'error_message', 'Fail to delete this credit' );
-		}
-
-		return redirect()->route( 'creditCard.index' );
-	}
+        return redirect()->route('creditCard.index')->with(['success_message' => 'Delete successful']);
+    }
 }
