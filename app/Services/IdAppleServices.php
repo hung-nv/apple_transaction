@@ -8,6 +8,34 @@ use App\Models\IphoneInformation;
 class IdAppleServices
 {
     /**
+     * Get all id apples and params.
+     * @param $request
+     * @return array
+     */
+    public function getIdApples($request)
+    {
+        $idApples = Apple::orderByDesc('created_at');
+
+        $fail = -1;
+        if (isset($request->fail) && $request->fail != '-1' && is_numeric($request->fail)) {
+            $idApples = $idApples->where('total_fail', $request->fail);
+
+            $fail = $request->fail;
+        }
+
+        $pageSize = 10;
+        if (isset($request->page_size) && is_numeric($request->page_size)) {
+            $pageSize = $request->page_size;
+        }
+
+        $idApples = $idApples->paginate($pageSize);
+
+        $return = ['fail' => $fail, 'pageSize' => $pageSize, 'idApples' => $idApples];
+
+        return $return;
+    }
+
+    /**
      * * Create multi id apples
      * @param array $data
      * @return array
@@ -81,6 +109,20 @@ class IdAppleServices
     {
         try {
             Apple::findOrFail($id)->delete();
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
+    }
+
+    /**
+     * Delete multi selected id apples.
+     * @param array $data
+     * @throws \Exception
+     */
+    public function deleteSelectedIdApple($data)
+    {
+        try {
+            Apple::destroy($data['idApples']);
         } catch (\Exception $exception) {
             throw $exception;
         }

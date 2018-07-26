@@ -43,11 +43,6 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6 pull-right text-right">
-                                <a class="btn sbold red" href="{{ route('apple.deleteAll') }}"
-                                   onclick="return confirm('Do you want to delete all?');"> Delete All
-                                </a>
-                            </div>
                         </div>
                     </div>
 

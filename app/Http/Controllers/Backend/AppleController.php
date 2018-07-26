@@ -26,10 +26,12 @@ class AppleController extends Controller
      */
     public function index(Request $request)
     {
-        $idApples = Apple::orderByDesc('created_at')->paginate(10);
+        $dataApples = $this->idAppleServices->getIdApples($request);
 
         return view('backend.apple.index', [
-            'data' => $idApples
+            'idApples' => $dataApples['idApples'],
+            'fail' => $dataApples['fail'],
+            'pageSize' => $dataApples['pageSize']
         ]);
     }
 
@@ -68,12 +70,18 @@ class AppleController extends Controller
     }
 
     /**
-     * @return \Illuminate\Http\RedirectResponse
+     * Delete selected id apple.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function deleteAll()
+    public function deleteAll(Request $request)
     {
-        Apple::truncate();
+        $this->idAppleServices->deleteSelectedIdApple($request->all());
 
-        return redirect()->route('apple.index');
+        return response()->json([
+            'url' => route('apple.index'),
+            'messages' => 'You have delete successful!'
+        ], 200);
     }
 }

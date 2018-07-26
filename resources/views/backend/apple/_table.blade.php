@@ -18,8 +18,8 @@
         </thead>
         <tbody>
 
-        @if(!empty($data))
-            @foreach($data as $i)
+        @if(!empty($idApples))
+            @foreach($idApples as $i)
 
                 <tr class="odd gradeX" role="row">
                     <td>
@@ -55,5 +55,7 @@
         </tbody>
     </table>
 
-    {{ $data->appends(['sort' => 'votes'])->links() }}
+    @if(!empty($idApples))
+        {{ $idApples->appends(['page_size' => $pageSize, 'fail' => $fail])->links() }}
+    @endif
 </div>

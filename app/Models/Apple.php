@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Apple extends \Eloquent
 {
+
+    use SoftDeletes;
+
 	/**
 	 * @var string define table name.
 	 */
@@ -23,6 +27,8 @@ class Apple extends \Eloquent
         'user_id',
         'is_used'
     ];
+
+    protected $dates = ['deleted_at'];
 
 	/**
 	 * Define relationship belongs to.
