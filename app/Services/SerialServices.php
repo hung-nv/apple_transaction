@@ -23,7 +23,7 @@ class SerialServices
     public function createSerials($data)
     {
         // format data
-        $serials = explode("\n", trim($data['credit_cards']));
+        $serials = explode("\n", trim($data['serials']));
         $serials = array_filter($serials, 'trim'); // remove any extra \r characters left behind
 
         $countSerial = 0;

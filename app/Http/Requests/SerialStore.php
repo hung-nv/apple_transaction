@@ -24,7 +24,7 @@ class SerialStore extends FormRequest
     public function rules()
     {
         return [
-            //
+            'serials' => 'required'
         ];
     }
 }

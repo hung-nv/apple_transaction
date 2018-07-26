@@ -57,12 +57,27 @@ export default class idApple {
         let element = $(event.target);
         if(element.is(':checked')) {
             selectedIdApple.push(element.data('id'));
+            element.parents('tr').addClass("active");
         } else {
             selectedIdApple.splice($.inArray(element.data('id'), selectedIdApple),1);
+            element.parents('tr').removeClass("active");
         }
     }
 
     public selectAll() {
-
+        let table = '';
+        // table.find('.group-checkable').change(function () {
+        //     var set = jQuery(this).attr("data-set");
+        //     var checked = jQuery(this).is(":checked");
+        //     jQuery(set).each(function () {
+        //         if (checked) {
+        //             $(this).prop("checked", true);
+        //             $(this).parents('tr').addClass("active");
+        //         } else {
+        //             $(this).prop("checked", false);
+        //             $(this).parents('tr').removeClass("active");
+        //         }
+        //     });
+        // });
     }
 }

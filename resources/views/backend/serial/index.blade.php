@@ -2,7 +2,7 @@
 
 @section('title', 'Manage Serial')
 
-@section('pageId', 'idApple')
+@section('pageId', 'serial')
 
 @section('breadcrumbs')
     <a href="{{ route('serial.index') }}">Serial</a>
@@ -44,16 +44,11 @@
                         </div>
                     </div>
                     <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                           id="data-apple">
+                           id="data-serial">
                         <thead>
                         <tr>
-                            <th > ID </th>
-                            <th> Apple ID</th>
-                            <th> Password</th>
-                            <th> iPhone Internal Name</th>
-                            <th> iPhone Identify</th>
-                            <th> iPhone Model</th>
-                            <th> Total add infor fail</th>
+                            <th> ID </th>
+                            <th> Number</th>
                             <th> Used</th>
                             <th> Actions</th>
                         </tr>
@@ -64,13 +59,8 @@
                             @foreach($data as $i)
 
                                 <tr class="odd gradeX">
-                                    <td><input type="checkbox" data-id="{{ $i->id }}" v-on:click="selectIdApple"></td>
-                                    <td>{{ $i->email }}</td>
-                                    <td>{{ $i->password }}</td>
-                                    <td>{{ $i->iphone_internal_name }}</td>
-                                    <td>{{ $i->iphone_identify }}</td>
-                                    <td>{{ $i->iphone_model }}</td>
-                                    <td>{{ $i->total_fail }}</td>
+                                    <td>{{ $i->id }}</td>
+                                    <td>{{ $i->number }}</td>
                                     <td>
                                         @if($i->is_used === 0)
                                             <span class="badge badge-info badge-roundless"> No </span>
@@ -79,7 +69,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <form action="{{ route('apple.destroy', $i->id) }}" method="POST">
+                                        <form action="{{ route('serial.destroy', $i->id) }}" method="POST">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
                                             <button type="button" class="btn red btn-sm" v-on:click="confirmDelete">Delete</button>

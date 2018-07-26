@@ -26,7 +26,7 @@ class AppleController extends Controller
      */
     public function index(Request $request)
     {
-        $idApples = Apple::orderByDesc('created_at')->paginate(20);
+        $idApples = Apple::orderByDesc('created_at')->paginate(10);
 
         return view('backend.apple.index', [
             'data' => $idApples

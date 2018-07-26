@@ -1,15 +1,15 @@
 @extends('backend.layouts.app')
 
 @section('title')
-    Insert Id Apple
+    Insert Serials
 @endsection
 
 @section('breadcrumbs')
-    <a href="{{ route('apple.index') }}">Apples</a>
+    <a href="{{ route('serial.index') }}">Serials</a>
 @endsection
 
 @section('content')
-    <h3 class="page-title"> Apple ID
+    <h3 class="page-title"> Serials
         <small>Insert</small>
     </h3>
 
@@ -25,14 +25,14 @@
 
                     @include('backend.blocks.message')
 
-                    <form action="{{ route('apple.store') }}" class="form-horizontal form-row-seperated" role="form"
+                    <form action="{{ route('serial.store') }}" class="form-horizontal form-row-seperated" role="form"
                           method="post" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
 
                         @include('backend.blocks.errors')
 
-                        @include('backend.apple._form')
+                        @include('backend.serial._form')
 
                         @include('backend.common.actionForm')
 

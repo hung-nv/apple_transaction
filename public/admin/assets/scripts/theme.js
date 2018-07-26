@@ -9,12 +9,3 @@ $(function () {
         $(".alert-info").hide();
     }, 3000);
 });
-
-function pageDatatable(idSelected) {
-    $(idSelected).dataTable({
-        ordering: false,
-        order: [[0, 'desc']],
-        bLengthChange: true,
-        bFilter: true
-    });
-}

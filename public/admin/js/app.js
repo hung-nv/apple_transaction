@@ -2830,7 +2830,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     'idApple': 'pages/IdApple',
     'iPhoneInformation': 'pages/IphoneInformation',
-    'creditCard': 'pages/CreditCard'
+    'creditCard': 'pages/CreditCard',
+    'serial': 'pages/Serial'
 };
 
 
@@ -4112,12 +4113,28 @@ var idApple = /** @class */ (function () {
         var element = $(event.target);
         if (element.is(':checked')) {
             selectedIdApple.push(element.data('id'));
+            element.parents('tr').addClass("active");
         }
         else {
             selectedIdApple.splice($.inArray(element.data('id'), selectedIdApple), 1);
+            element.parents('tr').removeClass("active");
         }
     };
     idApple.prototype.selectAll = function () {
+        var table = '';
+        // table.find('.group-checkable').change(function () {
+        //     var set = jQuery(this).attr("data-set");
+        //     var checked = jQuery(this).is(":checked");
+        //     jQuery(set).each(function () {
+        //         if (checked) {
+        //             $(this).prop("checked", true);
+        //             $(this).parents('tr').addClass("active");
+        //         } else {
+        //             $(this).prop("checked", false);
+        //             $(this).parents('tr').removeClass("active");
+        //         }
+        //     });
+        // });
     };
     return idApple;
 }());
@@ -20429,6 +20446,8 @@ var map = {
 	"./pages/IdApple.ts": 131,
 	"./pages/IphoneInformation": 132,
 	"./pages/IphoneInformation.ts": 132,
+	"./pages/Serial": 349,
+	"./pages/Serial.ts": 349,
 	"./systems/PageModule": 133,
 	"./systems/PageModule.ts": 133,
 	"./systems/PageModuleParser": 93,
@@ -20473,6 +20492,32 @@ webpackContext.id = 343;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */,
+/* 349 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var helpers_1 = __webpack_require__(49);
+var ui = {};
+var Serial = /** @class */ (function () {
+    function Serial() {
+    }
+    Serial.prototype.setUp = function () {
+    };
+    Serial.prototype.confirmDelete = function (event) {
+        helpers_1.confirmBeforeDelete(event.target, 'Do you want to delete this?');
+    };
+    return Serial;
+}());
+exports.default = Serial;
+
 
 /***/ })
 /******/ ]);

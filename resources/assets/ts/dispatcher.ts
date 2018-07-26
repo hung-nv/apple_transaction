@@ -1,5 +1,6 @@
 export default {
     'idApple': 'pages/IdApple',
     'iPhoneInformation': 'pages/IphoneInformation',
-    'creditCard': 'pages/CreditCard'
+    'creditCard': 'pages/CreditCard',
+    'serial': 'pages/Serial'
 };
