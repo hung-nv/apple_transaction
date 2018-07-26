@@ -31,7 +31,6 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
 
         // route for id apples
 	    Route::resource('apple', 'AppleController');
-        Route::get('apple/deleteAll', ['as' => 'apple.deleteAll', 'uses' => 'AppleController@deleteAll'] );
 
 	    // route for credit card
 	    Route::resource('creditCard', 'CreditCardController');
@@ -49,4 +48,9 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
         Route::resource('menuSystem', 'MenuSystemController', ['except' => ['show']]);
         Route::resource('user', 'UserController');
     });
+});
+
+Route::group(['namespace' => 'Backend'], function () {
+    // get one id apple to use.
+    Route::get('get-id-apple', 'AppleController@getOneIdApple');
 });

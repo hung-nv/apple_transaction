@@ -20,6 +20,20 @@ class AppleController extends Controller
     }
 
     /**
+     * @throws \Exception
+     */
+    public function getOneIdApple()
+    {
+        $idApple = Apple::inRandomOrder()->first();
+        if ($idApple) {
+            $idApple->delete();
+            echo $idApple->email . '|' . $idApple->password . '|' . $idApple->iphone_internal_name . '|' . $idApple->iphone_identify . '|' . $idApple->iphone_model;
+        } else {
+            echo 'het';
+        }
+    }
+
+    /**
      * List all id apples.
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

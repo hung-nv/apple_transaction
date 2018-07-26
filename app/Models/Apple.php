@@ -10,13 +10,13 @@ class Apple extends \Eloquent
 
     use SoftDeletes;
 
-	/**
-	 * @var string define table name.
-	 */
+    /**
+     * @var string define table name.
+     */
     protected $table = 'apples';
-	/**
-	 * @var array list attribute can insert to table apples.
-	 */
+    /**
+     * @var array list attribute can insert to table apples.
+     */
     protected $fillable = [
         'email',
         'password',
@@ -30,11 +30,41 @@ class Apple extends \Eloquent
 
     protected $dates = ['deleted_at'];
 
-	/**
-	 * Define relationship belongs to.
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-    public function user() {
+    /**
+     * Define relationship belongs to.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
         return $this->belongsTo('App\Models\User');
+    }
+
+    /**
+     * Get by current user.
+     * @param $query
+     * @return mixed
+     */
+    public function scopeWithUser($query)
+    {
+        return $query->where('user_id', \Auth::user()->id);
+    }
+
+    /**
+     * Get Id Apples with conditions.
+     * @param $totalFail
+     * @param $pageSize
+     * @return mixed
+     */
+    public static function getIdApples($totalFail, $pageSize)
+    {
+        $idApples = self::orderByDesc('created_at')->withUser();
+
+        if ($totalFail != '-1') {
+            $idApples = $idApples->where('total_fail', $totalFail);
+        }
+
+        $idApples = $idApples->paginate($pageSize);
+
+        return $idApples;
     }
 }

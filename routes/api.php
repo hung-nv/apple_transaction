@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 */
 
 Route::group(['namespace' => 'Backend'], function () {
-    // detach exist iphone information
+    // detach exist iphone information.
     Route::get('checkIphoneInformation', 'IphoneInformationController@checkInformation');
 
-    // delete all selected id apples
+    // delete all selected id apples.
     Route::post('apple/delete-all', 'AppleController@deleteAll');
 });

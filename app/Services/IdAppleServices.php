@@ -14,12 +14,8 @@ class IdAppleServices
      */
     public function getIdApples($request)
     {
-        $idApples = Apple::orderByDesc('created_at');
-
         $fail = -1;
         if (isset($request->fail) && $request->fail != '-1' && is_numeric($request->fail)) {
-            $idApples = $idApples->where('total_fail', $request->fail);
-
             $fail = $request->fail;
         }
 
@@ -28,7 +24,7 @@ class IdAppleServices
             $pageSize = $request->page_size;
         }
 
-        $idApples = $idApples->paginate($pageSize);
+        $idApples = Apple::getIdApples($fail, $pageSize);
 
         $return = ['fail' => $fail, 'pageSize' => $pageSize, 'idApples' => $idApples];
 
