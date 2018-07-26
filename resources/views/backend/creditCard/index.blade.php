@@ -72,7 +72,7 @@
                                         <form action="{{ route('creditCard.destroy', $i->id) }}" method="POST">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
-                                            <button type="button" class="btn red btn-sm" v-on:click="confirmDelete">Delete</button>
+                                            <button type="button" class="btn red btn-xs" v-on:click="confirmDelete">Delete</button>
                                         </form>
                                     </td>
                                 </tr>

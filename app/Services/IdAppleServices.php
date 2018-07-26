@@ -4,9 +4,66 @@ namespace App\Services;
 
 use App\Models\Apple;
 use App\Models\IphoneInformation;
+use Illuminate\Support\Facades\DB;
 
 class IdAppleServices
 {
+    /**
+     * Force deleting id apple.
+     * @param $idApple
+     */
+    public function forceDestroy($idApple)
+    {
+        // get id apple
+        $apple = Apple::withTrashed()->where('email', $idApple)->first();
+
+        // if exist
+        if($apple) {
+            $apple->forceDelete();
+            echo 'da xoa';
+        } else {
+            echo 'invalid';
+        }
+    }
+
+    /**
+     * Log if add information fail.
+     * @param string $idApple
+     */
+    public function addInformationFail($idApple)
+    {
+        // get id apple
+        $apple = Apple::withTrashed()->where('email', $idApple)->first();
+
+        // get current add fail.
+        $number = $apple->total_fail;
+
+        // check if it's trashed
+        if ($apple->trashed()) {
+            $apple->restore();
+            $apple->update(['total_fail' => DB::raw('total_fail + 1')]);
+
+            echo ($number + 1).' lan';
+        } else {
+            echo 'invalid';
+        }
+    }
+
+    /**
+     * Get one id apple.
+     */
+    public function getOneIdApple()
+    {
+        $idApple = Apple::inRandomOrder()->first();
+        if ($idApple) {
+            $idApple->delete();
+            echo $idApple->email . '|' . $idApple->password . '|' . $idApple->iphone_internal_name . '|'
+                . $idApple->iphone_identify . '|' . $idApple->iphone_model;
+        } else {
+            echo 'het';
+        }
+    }
+
     /**
      * Get all id apples and params.
      * @param $request

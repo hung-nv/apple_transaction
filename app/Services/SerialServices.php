@@ -7,6 +7,20 @@ use App\Models\Serial;
 class SerialServices
 {
     /**
+     * Get one serial.
+     */
+    public function getOneSerial()
+    {
+        $serial = Serial::inRandomOrder()->first();
+        if ($serial) {
+            echo $serial->number;
+            $serial->delete();
+        } else {
+            echo 'het';
+        }
+    }
+
+    /**
      * Get all Serials.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */

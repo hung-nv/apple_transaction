@@ -16,6 +16,14 @@ class SerialController extends Controller
     }
 
     /**
+     * Get one serial.
+     */
+    public function getOneSerial()
+    {
+        $this->serialServices->getOneSerial();
+    }
+
+    /**
      * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteAll()

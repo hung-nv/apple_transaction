@@ -1,8 +1,8 @@
 @extends('backend.layouts.app')
 
-@section('title')
-    Insert Id Apple
-@endsection
+@section('title', 'Insert Id Apple')
+
+@section('pageId', 'createIdApple')
 
 @section('breadcrumbs')
     <a href="{{ route('apple.index') }}">Apples</a>

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\IdAppleStore;
-use App\Models\Apple;
 use App\Services\IdAppleServices;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,12 +10,34 @@ use App\Http\Controllers\Controller;
 class AppleController extends Controller
 {
 
+    /**
+     * Define name of services.
+     * @var IdAppleServices
+     */
     protected $idAppleServices;
 
+    /**
+     * AppleController constructor.
+     * @param IdAppleServices $services
+     */
     public function __construct(IdAppleServices $services)
     {
         parent::__construct();
         $this->idAppleServices = $services;
+    }
+
+    public function forceDestroy($idApple)
+    {
+        $this->idAppleServices->forceDestroy($idApple);
+    }
+
+    /**
+     * Log if add information fail.
+     * @param string $idApple
+     */
+    public function addInformationFail($idApple)
+    {
+        $this->idAppleServices->addInformationFail($idApple);
     }
 
     /**
@@ -24,13 +45,7 @@ class AppleController extends Controller
      */
     public function getOneIdApple()
     {
-        $idApple = Apple::inRandomOrder()->first();
-        if ($idApple) {
-            $idApple->delete();
-            echo $idApple->email . '|' . $idApple->password . '|' . $idApple->iphone_internal_name . '|' . $idApple->iphone_identify . '|' . $idApple->iphone_model;
-        } else {
-            echo 'het';
-        }
+        $this->idAppleServices->getOneIdApple();
     }
 
     /**

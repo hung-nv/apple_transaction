@@ -2887,6 +2887,7 @@ exports[DATA_VIEW] = $DataView;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
     'idApple': 'pages/IdApple',
+    'createIdApple': 'pages/CreateIdApple',
     'iPhoneInformation': 'pages/IphoneInformation',
     'creditCard': 'pages/CreditCard',
     'serial': 'pages/Serial'
@@ -20551,6 +20552,8 @@ var map = {
 	"./app.ts": 66,
 	"./dispatcher": 93,
 	"./dispatcher.ts": 93,
+	"./pages/CreateIdApple": 352,
+	"./pages/CreateIdApple.ts": 352,
 	"./pages/CreditCard": 130,
 	"./pages/CreditCard.ts": 130,
 	"./pages/IdApple": 131,
@@ -37744,6 +37747,50 @@ module.exports = function(module) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 348 */,
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var helpers_1 = __webpack_require__(46);
+var CreateIdApple = /** @class */ (function () {
+    function CreateIdApple() {
+    }
+    CreateIdApple.prototype.setUp = function () {
+        this.createIdApple();
+    };
+    /**
+     * Check exist iphone information before create id apples.
+     */
+    CreateIdApple.prototype.createIdApple = function () {
+        $.ajax({
+            method: 'get',
+            url: '/api/checkIphoneInformation'
+        }).done(function (respon) {
+            if (respon.message === 'ok') {
+            }
+            else {
+                swal({
+                    type: 'error',
+                    title: 'Fail...',
+                    html: 'You must <a href="' + respon.url + '">create iPhone Information</a> first.'
+                });
+            }
+        }).fail(function (xhr) {
+            helpers_1.doException(xhr);
+        });
+    };
+    return CreateIdApple;
+}());
+exports.default = CreateIdApple;
+
 
 /***/ })
 /******/ ]);

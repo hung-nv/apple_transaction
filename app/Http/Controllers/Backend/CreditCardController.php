@@ -17,6 +17,11 @@ class CreditCardController extends Controller
         $this->creditCardServices = $creditCardServices;
     }
 
+    public function getOneCredit()
+    {
+        $this->creditCardServices->getOneCredit();
+    }
+
     /**
      * @return \Illuminate\Http\RedirectResponse
      */

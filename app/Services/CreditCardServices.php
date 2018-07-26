@@ -7,6 +7,19 @@ use App\Models\CreditCard;
 class CreditCardServices
 {
     /**
+     * Get one credit card.
+     */
+    public function getOneCredit()
+    {
+        $creditCard = CreditCard::inRandomOrder()->first();
+        if ($creditCard) {
+            echo $creditCard->number;
+            $creditCard->delete();
+        } else {
+            echo 'het';
+        }
+    }
+    /**
      * Get all credit cards.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */

@@ -153,7 +153,7 @@ return [
         // ide helper for laravel
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         // laravel debug
-        Barryvdh\Debugbar\ServiceProvider::class,
+//        Barryvdh\Debugbar\ServiceProvider::class,
         // detach device
         Jenssegers\Agent\AgentServiceProvider::class,
         // view composer

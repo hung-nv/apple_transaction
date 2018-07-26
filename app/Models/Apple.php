@@ -24,8 +24,7 @@ class Apple extends \Eloquent
         'iphone_identify',
         'iphone_model',
         'total_fail',
-        'user_id',
-        'is_used'
+        'user_id'
     ];
 
     protected $dates = ['deleted_at'];
@@ -40,16 +39,6 @@ class Apple extends \Eloquent
     }
 
     /**
-     * Get by current user.
-     * @param $query
-     * @return mixed
-     */
-    public function scopeWithUser($query)
-    {
-        return $query->where('user_id', \Auth::user()->id);
-    }
-
-    /**
      * Get Id Apples with conditions.
      * @param $totalFail
      * @param $pageSize
@@ -57,7 +46,7 @@ class Apple extends \Eloquent
      */
     public static function getIdApples($totalFail, $pageSize)
     {
-        $idApples = self::orderByDesc('created_at')->withUser();
+        $idApples = self::orderByDesc('created_at');
 
         if ($totalFail != '-1') {
             $idApples = $idApples->where('total_fail', $totalFail);

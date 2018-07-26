@@ -12,7 +12,6 @@
             <th> iPhone Identify</th>
             <th> iPhone Model</th>
             <th> Total add infor fail</th>
-            <th> Used</th>
             <th> Actions</th>
         </tr>
         </thead>
@@ -32,13 +31,6 @@
                     <td>{{ $i->iphone_identify }}</td>
                     <td>{{ $i->iphone_model }}</td>
                     <td>{{ $i->total_fail }}</td>
-                    <td>
-                        @if($i->is_used === 0)
-                            <span class="badge badge-info badge-roundless"> No </span>
-                        @else
-                            <span class="badge badge-default badge-roundless"> Yes </span>
-                        @endif
-                    </td>
                     <td>
                         <form action="{{ route('apple.destroy', $i->id) }}" method="POST">
                             {{ method_field('DELETE') }}

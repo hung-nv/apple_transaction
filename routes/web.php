@@ -40,8 +40,11 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
 	    Route::resource('serial', 'SerialController');
         Route::get('serial/deleteAll', ['as' => 'serial.deleteAll', 'uses' => 'SerialController@deleteAll'] );
 
+        // route for iphone Information
 	    Route::resource('iphoneInformation', 'IphoneInformationController');
 	    Route::get('iphoneInformation/deleteAll', ['as' => 'iphoneInformation.deleteAll', 'uses' => 'IphoneInformationController@deleteAll'] );
+
+	    Route::resource('idPurchase', 'IdApplePurchaseController', ['onlye' => 'index', 'destroy']);
     });
 
     Route::group(['middleware' => 'checkrole:1'], function () {
@@ -53,4 +56,19 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' =
 Route::group(['namespace' => 'Backend'], function () {
     // get one id apple to use.
     Route::get('get-id-apple', 'AppleController@getOneIdApple');
+
+    // log case add information fail
+    Route::get('id-apple/fail/{idApple}', 'AppleController@addInformationFail');
+
+    // handle delete force id apple
+    Route::get('id-apple/delete/{idApple}', 'AppleController@forceDestroy');
+
+    // get one credit card to use.
+    Route::get('get-credit', 'CreditCardController@getOneCredit');
+
+    // get one serial to use.
+    Route::get('get-serial', 'SerialController@getOneSerial');
+
+    // create id purchase
+    Route::get('id-purchase/{user}/{device}/{idApple}/{number}/{imei}/{lang}', 'IdApplePurchaseController@create');
 });
