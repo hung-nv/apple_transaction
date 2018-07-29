@@ -11,6 +11,7 @@ class IdAppleServices
     /**
      * Force deleting id apple.
      * @param $idApple
+     * @throws \Exception
      */
     public function forceDestroy($idApple)
     {
@@ -18,9 +19,13 @@ class IdAppleServices
         $apple = Apple::withTrashed()->where('email', $idApple)->first();
 
         // if exist
-        if($apple) {
-            $apple->forceDelete();
-            echo 'da xoa';
+        if ($apple) {
+            try {
+                $apple->delete();
+                echo 'da xoa';
+            } catch (\Exception $exception) {
+                echo 'idapple nay da co du lieu ngam hoac da co giao dich mua nen khong xoa duoc';
+            }
         } else {
             echo 'invalid';
         }
@@ -43,7 +48,7 @@ class IdAppleServices
             $apple->restore();
             $apple->update(['total_fail' => DB::raw('total_fail + 1')]);
 
-            echo ($number + 1).' lan';
+            echo ($number + 1) . ' lan';
         } else {
             echo 'invalid';
         }

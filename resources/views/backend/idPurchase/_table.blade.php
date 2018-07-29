@@ -10,6 +10,9 @@
             <th> Device</th>
             <th> Imei</th>
             <th> Language</th>
+            <th> Total Purchase Successful</th>
+            <th> Total Purchase Fail</th>
+            <th> Money Purchased</th>
             <th> Actions</th>
         </tr>
         </thead>
@@ -26,6 +29,9 @@
                     <td>{{ $i->id_device }}</td>
                     <td>{{ $i->imei }}</td>
                     <td>{{ $i->language }}</td>
+                    <td>{{ $i->total_purchase_successful }}</td>
+                    <td>{{ $i->total_puchase_fail }}</td>
+                    <td>{{ $i->money_purchased }}</td>
                     <td>
                         <form action="{{ route('idPurchase.destroy', $i->id) }}" method="POST">
                             {{ method_field('DELETE') }}

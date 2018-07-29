@@ -57,4 +57,23 @@ class IdApplePurchase extends \Eloquent
     {
         return $this->belongsTo('App\Models\Serial');
     }
+
+    /**
+     * use: me()
+     * @param $query
+     * @return mixed
+     */
+    public function scopeMe($query)
+    {
+        return $query->where('user_id', \Auth::user()->id);
+    }
+
+    /**
+     * Get all id purchases.
+     * @return mixed
+     */
+    public static function getIdPurchases()
+    {
+        return self::orderByDesc('created_at')->me()->paginate(20);
+    }
 }

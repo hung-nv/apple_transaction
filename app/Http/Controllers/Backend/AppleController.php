@@ -26,6 +26,9 @@ class AppleController extends Controller
         $this->idAppleServices = $services;
     }
 
+    /**
+     * @param $idApple
+     */
     public function forceDestroy($idApple)
     {
         $this->idAppleServices->forceDestroy($idApple);

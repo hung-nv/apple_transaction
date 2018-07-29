@@ -10,12 +10,21 @@ use App\Models\User;
 
 class IdPurchaseServices
 {
+    /**
+     * @param string $user: username
+     * @param string $device
+     * @param string $idApple
+     * @param string $number
+     * @param string $imei
+     * @param string $lang
+     * @return string
+     */
     public function createIdPurchase($user, $device, $idApple, $number, $imei, $lang)
     {
-        $message = '';
-
+        // check invaid params.
         if (empty($user) || empty($device) || empty($idApple) || empty($number) || empty($imei) || empty($lang)) {
             $message = 'invalid';
+            return $message;
         }
 
         $user = User::where('username', $user)->first();
@@ -46,8 +55,12 @@ class IdPurchaseServices
         return $message;
     }
 
+    /**
+     * Get all id purchase.
+     * @return mixed
+     */
     public function getIdPurchases()
     {
-        return IdApplePurchase::orderByDesc('created_at')->paginate(20);
+        return IdApplePurchase::getIdPurchases();
     }
 }
