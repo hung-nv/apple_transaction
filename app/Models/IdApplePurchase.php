@@ -59,6 +59,15 @@ class IdApplePurchase extends \Eloquent
     }
 
     /**
+     * Define relationship has many.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transactions()
+    {
+        return $this->hasMany('App\Models\IdAppleTransaction', 'purchase_id');
+    }
+
+    /**
      * use: me()
      * @param $query
      * @return mixed
@@ -69,11 +78,60 @@ class IdApplePurchase extends \Eloquent
     }
 
     /**
+     * With condition in last 3 day.
+     * @param $query
+     * @return mixed
+     */
+    public function scopeTimeDelay($query)
+    {
+        return $query->havingRaw('(UNIX_TIMESTAMP(now()) - UNIX_TIMESTAMP(created_at)) < ?', [259200]);
+    }
+
+    /**
      * Get all id purchases.
      * @return mixed
      */
     public static function getIdPurchases()
     {
         return self::orderByDesc('created_at')->me()->paginate(20);
+    }
+
+    /**
+     * Get Id purchase. (can chon random trong 1 khoang thoi gian, neu khong se bi lap lai)
+     * @param int $userId
+     * @param string $device
+     * @return IdApplePurchase|Model|null|object
+     */
+    public function getOneIdPurchase($userId, $device)
+    {
+        return self::where('user_id', $userId)
+            ->where('id_device', $device)
+            ->inRandomOrder()
+            ->timeDelay()
+            ->first();
+    }
+
+    /**
+     * Get id purchase by id apple.
+     * @param $idApple
+     * @param null $username
+     * @return IdApplePurchase|Model|null|object
+     */
+    public static function getIdPurchaseByIdApple($idApple, $username = null)
+    {
+        $apple = Apple::getIdAppleByEmail($idApple);
+
+        if ($apple) {
+            $idPurchase = self::where('apple_id', $apple->id);
+
+            if ($username) {
+                $user = User::getUserByUsername($username);
+                $idPurchase = $idPurchase->where('user_id', $user->id);
+            }
+
+            return $idPurchase ? $idPurchase->first() : null;
+        }
+
+        return null;
     }
 }

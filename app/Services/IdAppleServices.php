@@ -16,7 +16,7 @@ class IdAppleServices
     public function forceDestroy($idApple)
     {
         // get id apple
-        $apple = Apple::withTrashed()->where('email', $idApple)->first();
+        $apple = Apple::where('email', $idApple)->first();
 
         // if exist
         if ($apple) {

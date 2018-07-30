@@ -30,6 +30,7 @@ class IdApplePurchaseController extends Controller
         echo $response;
     }
 
+
     public function index()
     {
         $idPurchases = $this->idPurchaseServices->getIdPurchases();
@@ -38,5 +39,27 @@ class IdApplePurchaseController extends Controller
             'idPurchases' => $idPurchases,
             'pageSize' => 10
         ]);
+    }
+
+    /**
+     * Get a id purchase to use.
+     * @param string $user
+     * @param string $device
+     * @throws \Exception
+     */
+    public function getOneIdPurchase($user, $device)
+    {
+        $this->idPurchaseServices->getOneIdPurchase($user, $device);
+    }
+
+    /**
+     * Delete id purchase by handle api.
+     * @param string $user
+     * @param string $idApple
+     * @throws \Exception
+     */
+    public function deleteHandle($user, $idApple)
+    {
+        $this->idPurchaseServices->deleteHandle($user, $idApple);
     }
 }

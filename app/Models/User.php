@@ -28,4 +28,15 @@ class User extends Authenticatable
     ];
 
     protected $table = 'users';
+
+    /**
+     * Get user by username.
+     * @param $username
+     * @return User|\Illuminate\Database\Eloquent\Model|null|object
+     */
+    public static function getUserByUsername($username)
+    {
+        $user = self::where('username', $username);
+        return $user ? $user->first() : null;
+    }
 }

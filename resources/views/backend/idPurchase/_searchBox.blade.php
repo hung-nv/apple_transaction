@@ -18,7 +18,7 @@
         <div class="col-md-5 col-sm-12">
             <div class="table-group-actions pull-right">
                 <span> </span>
-                <input placeholder="Total fail" name="fail" value=""
+                <input placeholder="Total fail" name="fail" value="" type="number"
                        class="form-control input-inline input-sm input-small table-group-action-input">
                 <button class="btn btn-sm green table-group-action-submit" type="submit">
                     <i class="fa fa-check"></i> Search

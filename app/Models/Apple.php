@@ -56,4 +56,15 @@ class Apple extends \Eloquent
 
         return $idApples;
     }
+
+    /**
+     * Get id apple by email.
+     * @param $email
+     * @return Apple|Model|null|object
+     */
+    public static function getIdAppleByEmail($email)
+    {
+        $apple = self::where('email', $email);
+        return $apple ? $apple->first() : null;
+    }
 }

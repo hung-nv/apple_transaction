@@ -69,6 +69,18 @@ Route::group(['namespace' => 'Backend'], function () {
     // get one serial to use.
     Route::get('get-serial', 'SerialController@getOneSerial');
 
-    // create id purchase
+    // create id purchase.
     Route::get('id-purchase/{user}/{device}/{idApple}/{number}/{imei}/{lang}', 'IdApplePurchaseController@create');
+
+    // get one id purchase to use.
+    Route::get('get-id-purchase/{user}/{device}', 'IdApplePurchaseController@getOneIdPurchase');
+
+    // log purchase successful.
+    Route::get('done-purchase/{user}/{idApple}/{money}', 'IdAppleTransactionController@create');
+
+    // log purchase fail.
+    Route::get('fail-purchase/{user}/{idApple}', 'IdAppleTransactionController@createFail');
+
+    // delete id purchase handle.
+    Route::get('delete-id-purchase/{user}/{idApple}', 'IdApplePurchaseController@deleteHandle');
 });

@@ -11,7 +11,7 @@ use App\Models\User;
 class IdPurchaseServices
 {
     /**
-     * @param string $user: username
+     * @param string $user : username
      * @param string $device
      * @param string $idApple
      * @param string $number
@@ -30,7 +30,7 @@ class IdPurchaseServices
         $user = User::where('username', $user)->first();
 
         if (empty($user)) {
-            $message = 'user khong dung';
+            $message = 'invalid';
         } else {
             // get id apple.
             $apple = Apple::where('email', $idApple)->first();
@@ -62,5 +62,46 @@ class IdPurchaseServices
     public function getIdPurchases()
     {
         return IdApplePurchase::getIdPurchases();
+    }
+
+    /**
+     * Get one id purchase to use.
+     * @param $username
+     * @param $device
+     * @throws \Exception
+     */
+    public function getOneIdPurchase($username, $device)
+    {
+        $user = User::where('username', $username)->first();
+
+        if (empty($user)) {
+            echo 'invalid';
+        } else {
+            $idpurchase = IdApplePurchase::getOneIdPurchase($user->id, $device);
+            if ($idpurchase) {
+                $idpurchase->delete();
+                echo $idpurchase->apple->email . '|' . $idpurchase->apple->password;
+            } else {
+                echo 'khong co';
+            }
+        }
+    }
+
+    /**
+     * Delete by handle api.
+     * @param $user
+     * @param $idApple
+     * @throws \Exception
+     */
+    public function deleteHandle($user, $idApple)
+    {
+        $idPurchase = IdApplePurchase::getIdPurchaseByIdApple($idApple, $user);
+
+        if ($idPurchase) {
+            $idPurchase->delete();
+            echo 'da xoa';
+        } else {
+            echo 'invalid';
+        }
     }
 }

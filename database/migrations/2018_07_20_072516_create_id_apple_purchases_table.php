@@ -28,9 +28,9 @@ class CreateIdApplePurchasesTable extends Migration
             $table->integer('serial_id')->unsigned();
             $table->foreign('serial_id')->references('id')->on('serials');
 
-            $table->tinyInteger('total_purchase_successful')->nullable();
-            $table->tinyInteger('total_puchase_fail')->nullable();
-            $table->integer('money_purchased')->nullable();
+            $table->tinyInteger('total_purchase_successful')->default(0);
+            $table->tinyInteger('total_puchase_fail')->default(0);
+            $table->integer('money_purchased')->default(0);
 
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
