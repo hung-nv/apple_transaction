@@ -28,9 +28,9 @@ class MenuSystemTableSeeder extends Seeder
             ['label' => 'Insert', 'icon' => 'icon-plus', 'route' => 'iphoneInformation.create', 'parent_id' => 10, 'sort' => 1, 'show' => '1,2'],
             ['label' => 'All', 'icon' => 'icon-list', 'route' => 'iphoneInformation.index', 'parent_id' => 10, 'sort' => 2, 'show' => '1,2'],
 
-            ['label' => 'Id purchase', 'icon' => 'icon-handbag', 'route' => 'idPurchase', 'parent_id' => null, 'sort' => 4, 'show' => '1,2'],
+            ['label' => 'Id purchase', 'icon' => 'icon-handbag', 'route' => 'idPurchase.index', 'parent_id' => null, 'sort' => 4, 'show' => '1,2'],
 
-            ['label' => 'Transaction', 'icon' => 'icon-list', 'route' => 'transaction', 'parent_id' => null, 'sort' => 5, 'show' => '1,2'],
+            ['label' => 'Transaction', 'icon' => 'icon-list', 'route' => 'idTransaction.index', 'parent_id' => null, 'sort' => 5, 'show' => '1,2'],
 
             ['label' => 'Users', 'icon' => 'icon-user', 'route' => 'user', 'parent_id' => null, 'sort' => 6, 'show' => '1'],
             ['label' => 'Create User', 'icon' => 'icon-user-follow', 'route' => 'user.create', 'parent_id' => 15, 'sort' => 1, 'show' => '1'],
