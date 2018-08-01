@@ -24,8 +24,8 @@ class IphoneInformationUpdate extends FormRequest
     public function rules()
     {
         return [
-            'internal_name' => 'max:255|required|unique:iphone_informations,internal_name,'.$this->segment(3),
-            'identify' => 'max:255,required|unique:iphone_informations,identify,'.$this->segment(3),
+            'internal_name' => 'max:255|required|unique:iphone_informations,internal_name,'.$this->segment(2),
+            'identify' => 'max:255,required|unique:iphone_informations,identify,'.$this->segment(2),
             'models' => ['required', 'regex:/^(\w|\,|\s)+$/']
         ];
     }

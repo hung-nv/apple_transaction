@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class IdAppleTransaction extends Model
+class IdAppleTransaction extends \Eloquent
 {
     protected $table = 'id_apple_transactions';
 
@@ -22,5 +22,41 @@ class IdAppleTransaction extends Model
     public function idPurchase()
     {
         return $this->belongsTo('App\Models\IdApplePurchase', 'purchase_id');
+    }
+
+    /**
+     * use: me()
+     * @param $query
+     * @return mixed
+     */
+    public function scopeMe($query)
+    {
+        return $query->where('user_id', \Auth::user()->id);
+    }
+
+    /**
+     * get all transactions.
+     * @param string $email
+     * @param int $pageSize
+     * @return mixed
+     */
+    public static function getAllTransactions($email, $pageSize)
+    {
+        $idTransactions = self::orderByDesc('created_at')->me();
+
+        if ($email != '-1') {
+
+            $purchaseId = IdApplePurchase::getIdByEmail($email);
+
+            if (empty($purchaseId)) {
+                return null;
+            }
+
+            $idTransactions = $idTransactions->where('purchase_id', $purchaseId);
+        }
+
+        $idTransactions = $idTransactions->paginate($pageSize);
+
+        return $idTransactions;
     }
 }

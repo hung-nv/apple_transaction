@@ -74,7 +74,7 @@ class IdPurchaseServices
 
         $idPurchases = IdApplePurchase::getIdPurchases($fail, $pageSize);
 
-        $return = ['fail' => $fail, 'pageSize' => $pageSize, 'idApples' => $idPurchases];
+        $return = ['fail' => $fail, 'pageSize' => $pageSize, 'idPurchases' => $idPurchases];
 
         return $return;
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class IdApplePurchase extends \Eloquent
 {
@@ -144,5 +145,21 @@ class IdApplePurchase extends \Eloquent
         }
 
         return null;
+    }
+
+    /**
+     * Get purchase id by email
+     * @param string $email
+     * @return mixed
+     */
+    public static function getIdByEmail($email)
+    {
+        $model = DB::table('id_apple_purchases as a')
+            ->select('a.id as purchaseId')
+            ->join('apples as b', 'b.id', '=', 'a.apple_id')
+            ->where('b.email', 'like', '%'.$email.'%')
+            ->first();
+
+        return $model ? $model->purchaseId : null;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Models\Apple;
 use App\Models\IdApplePurchase;
+use App\Models\IdAppleTransaction;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -83,5 +84,29 @@ class IdAppleTransactionServices
         } else {
             echo 'invalid';
         }
+    }
+
+    /**
+     * Get all transactions.
+     * @param $request
+     * @return array
+     */
+    public function getTransactions($request)
+    {
+        $email = -1;
+        if (isset($request->email) && $request->email != '-1') {
+            $email = $request->email;
+        }
+
+        $pageSize = 10;
+        if (isset($request->page_size) && is_numeric($request->page_size)) {
+            $pageSize = $request->page_size;
+        }
+
+        $idTransactions = IdAppleTransaction::getAllTransactions($email, $pageSize);
+
+        $return = ['email' => $email, 'pageSize' => $pageSize, 'idTransaction' => $idTransactions];
+
+        return $return;
     }
 }

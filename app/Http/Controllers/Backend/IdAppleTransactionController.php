@@ -37,4 +37,20 @@ class IdAppleTransactionController extends Controller
     {
         $this->transactionServices->purchaseFail($user, $idApple);
     }
+
+
+    /**
+     * Get all transactions.
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request)
+    {
+        $dataTransaction = $this->transactionServices->getTransactions($request);
+        return view('backend.idTransaction.index', [
+            'transaction' => $dataTransaction['idTransaction'],
+            'pageSize' => $dataTransaction['pageSize'],
+            'email' => $dataTransaction['email']
+        ]);
+    }
 }

@@ -4,5 +4,6 @@ export default {
     'iPhoneInformation': 'pages/IphoneInformation',
     'creditCard': 'pages/CreditCard',
     'serial': 'pages/Serial',
-    'idPurchase': 'pages/IdPurchases'
+    'idPurchase': 'pages/IdPurchases',
+    'idTransaction': 'pages/IdTransaction'
 };

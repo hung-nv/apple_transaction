@@ -41,7 +41,7 @@ class IdApplePurchaseController extends Controller
         $dataPurchases = $this->idPurchaseServices->getIdPurchases($request);
 
         return view('backend.idPurchase.index', [
-            'idPurchases' => $dataPurchases['idApples'],
+            'idPurchases' => $dataPurchases['idPurchases'],
             'fail' => $dataPurchases['fail'],
             'pageSize' => $dataPurchases['pageSize']
         ]);

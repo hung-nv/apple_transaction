@@ -44,7 +44,9 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Backend'], function () {
 	    Route::resource('iphoneInformation', 'IphoneInformationController');
 	    Route::get('iphoneInformation/deleteAll', ['as' => 'iphoneInformation.deleteAll', 'uses' => 'IphoneInformationController@deleteAll'] );
 
-	    Route::resource('idPurchase', 'IdApplePurchaseController', ['onlye' => 'index', 'destroy']);
+	    Route::resource('idPurchase', 'IdApplePurchaseController', ['only' => ['index', 'destroy', 'create']]);
+
+	    Route::resource('idTransaction', 'IdAppleTransactionController', ['only' => ['index', 'create']]);
     });
 
     Route::group(['middleware' => 'checkrole:1'], function () {
