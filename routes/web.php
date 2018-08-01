@@ -11,17 +11,17 @@
 |
 */
 
-Route::get('/administrator', function () {
+Route::get('/', function () {
     return view('backend.auth.login');
 });
 
-Route::group(['prefix' => 'administrator', 'namespace' => 'Backend'], function () {
+Route::group(['namespace' => 'Backend'], function () {
     Route::get('login', ['as' => 'login', 'uses' => 'LoginController@getLogin']);
     Route::post('login', ['as' => 'login', 'uses' => 'LoginController@postLogin']);
     Route::get('logout', ['as' => 'logout', 'uses' => 'LoginController@getLogout']);
 });
 
-Route::group(['prefix' => 'administrator', 'middleware' => 'auth', 'namespace' => 'Backend'], function () {
+Route::group(['middleware' => 'auth', 'namespace' => 'Backend'], function () {
     Route::group(['middleware' => 'checkrole:1|2'], function () {
         Route::get('/', ['as' => 'admin.dashboard', 'uses' => 'AdminSiteController@index']);
 

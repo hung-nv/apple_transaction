@@ -12,6 +12,14 @@
                 <h3 class="uppercase">Features</h3>
             </li>
 
+            <li class="nav-item start">
+                <a href="/" class="nav-item">
+                    <i class="icon-home"></i>
+                    <span class="title">Dashboard</span>
+                    <span class="arrow"></span>
+                </a>
+            </li>
+
             @if($sidebar)
                 @foreach($sidebar as $iMenu)
                     @if(in_array(Auth::user()->role, explode(',', $iMenu->show)))
