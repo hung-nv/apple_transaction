@@ -15,9 +15,9 @@ let selectedIdPurchases = [];
  * @type any
  */
 const ui = {
-    'urlDeleteSelectedIdPurchases': '/api/id-purchase/delete-all',
-    'formPurchases': '#frmSearchIdPurchases',
-    'chkIdPurchases': '.checkboxIdPurchase'
+    urlDeleteSelectedIdPurchases: '/api/id-purchase/delete-all',
+    formPurchases: '#frmSearchIdPurchases',
+    chkIdPurchases: '.checkboxIdPurchase'
 };
 
 export default class IdPurchases {
@@ -131,21 +131,32 @@ export default class IdPurchases {
             });
         }
 
-        // send ajax to delete
-        $.ajax({
-            url: ui.urlDeleteSelectedIdPurchases,
-            method: 'post',
-            data: {idPurchases: selectedIdPurchases}
-        }).done(respon => {
-            swal(
-                'Successful!',
-                respon.message,
-                'success'
-            ).then(function () {
-                window.location.href = respon.url;
+        swal({
+            title: 'Are you sure?',
+            text: 'Delete ' + selectedIdPurchases.length + ' id apple purchases.',
+            type: 'warning',
+            showCancelButton: true,
+            customClass: 'nvh-dialog',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete!'
+        }).then(function () {
+            // send ajax to delete
+            $.ajax({
+                url: ui.urlDeleteSelectedIdPurchases,
+                method: 'post',
+                data: {idPurchases: selectedIdPurchases}
+            }).done(respon => {
+                swal(
+                    'Successful!',
+                    respon.message,
+                    'success'
+                ).then(function () {
+                    window.location.href = respon.url;
+                });
+            }).fail((xhr) => {
+                doException(xhr);
             });
-        }).fail((xhr) => {
-            doException(xhr);
         });
     }
 }

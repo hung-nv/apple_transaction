@@ -150,21 +150,32 @@ export default class idApple {
             });
         }
 
-        // send ajax to delete
-        $.ajax({
-            url: ui.urlDeleteSelectedIdApples,
-            method: 'post',
-            data: {idApples: selectedIdApple}
-        }).done(respon => {
-            swal(
-                'Successful!',
-                respon.message,
-                'success'
-            ).then(function () {
-                window.location.href = respon.url;
+        swal({
+            title: 'Are you sure?',
+            text: 'Delete ' + selectedIdApple.length + ' id Apple.',
+            type: 'warning',
+            showCancelButton: true,
+            customClass: 'nvh-dialog',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete!'
+        }).then(function () {
+            // send ajax to delete
+            $.ajax({
+                url: ui.urlDeleteSelectedIdApples,
+                method: 'post',
+                data: {idApples: selectedIdApple}
+            }).done(respon => {
+                swal(
+                    'Successful!',
+                    respon.message,
+                    'success'
+                ).then(function () {
+                    window.location.href = respon.url;
+                });
+            }).fail((xhr) => {
+                doException(xhr);
             });
-        }).fail((xhr) => {
-            doException(xhr);
         });
     }
 }

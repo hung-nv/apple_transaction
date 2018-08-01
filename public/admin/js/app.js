@@ -4267,17 +4267,28 @@ var idApple = /** @class */ (function () {
                 text: "You don't select any id apple to delete!"
             });
         }
-        // send ajax to delete
-        $.ajax({
-            url: ui.urlDeleteSelectedIdApples,
-            method: 'post',
-            data: { idApples: selectedIdApple }
-        }).done(function (respon) {
-            swal('Successful!', respon.message, 'success').then(function () {
-                window.location.href = respon.url;
+        swal({
+            title: 'Are you sure?',
+            text: 'Delete ' + selectedIdApple.length + ' id Apple.',
+            type: 'warning',
+            showCancelButton: true,
+            customClass: 'nvh-dialog',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete!'
+        }).then(function () {
+            // send ajax to delete
+            $.ajax({
+                url: ui.urlDeleteSelectedIdApples,
+                method: 'post',
+                data: { idApples: selectedIdApple }
+            }).done(function (respon) {
+                swal('Successful!', respon.message, 'success').then(function () {
+                    window.location.href = respon.url;
+                });
+            }).fail(function (xhr) {
+                helpers_1.doException(xhr);
             });
-        }).fail(function (xhr) {
-            helpers_1.doException(xhr);
         });
     };
     return idApple;
@@ -21415,9 +21426,9 @@ var selectedIdPurchases = [];
  * @type any
  */
 var ui = {
-    'urlDeleteSelectedIdPurchases': '/api/id-purchase/delete-all',
-    'formPurchases': '#frmSearchIdPurchases',
-    'chkIdPurchases': '.checkboxIdPurchase'
+    urlDeleteSelectedIdPurchases: '/api/id-purchase/delete-all',
+    formPurchases: '#frmSearchIdPurchases',
+    chkIdPurchases: '.checkboxIdPurchase'
 };
 var IdPurchases = /** @class */ (function () {
     function IdPurchases() {
@@ -21520,17 +21531,28 @@ var IdPurchases = /** @class */ (function () {
                 text: "You don't select any id purchase to delete!"
             });
         }
-        // send ajax to delete
-        $.ajax({
-            url: ui.urlDeleteSelectedIdPurchases,
-            method: 'post',
-            data: { idPurchases: selectedIdPurchases }
-        }).done(function (respon) {
-            swal('Successful!', respon.message, 'success').then(function () {
-                window.location.href = respon.url;
+        swal({
+            title: 'Are you sure?',
+            text: 'Delete ' + selectedIdPurchases.length + ' id apple purchases.',
+            type: 'warning',
+            showCancelButton: true,
+            customClass: 'nvh-dialog',
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete!'
+        }).then(function () {
+            // send ajax to delete
+            $.ajax({
+                url: ui.urlDeleteSelectedIdPurchases,
+                method: 'post',
+                data: { idPurchases: selectedIdPurchases }
+            }).done(function (respon) {
+                swal('Successful!', respon.message, 'success').then(function () {
+                    window.location.href = respon.url;
+                });
+            }).fail(function (xhr) {
+                helpers_1.doException(xhr);
             });
-        }).fail(function (xhr) {
-            helpers_1.doException(xhr);
         });
     };
     return IdPurchases;

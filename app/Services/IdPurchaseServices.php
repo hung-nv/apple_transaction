@@ -92,9 +92,9 @@ class IdPurchaseServices
         if (empty($user)) {
             echo 'invalid';
         } else {
+            // lay ra id duoc ngam de su dung.
             $idpurchase = IdApplePurchase::getOneIdPurchase($user->id, $device);
             if ($idpurchase) {
-                $idpurchase->delete();
                 echo $idpurchase->apple->email . '|' . $idpurchase->apple->password;
             } else {
                 echo 'khong co';
@@ -128,7 +128,7 @@ class IdPurchaseServices
     public function deleteSelectedIdPurchase($data)
     {
         try {
-            Apple::destroy($data['idPurchases']);
+            IdApplePurchase::destroy($data['idPurchases']);
         } catch (\Exception $exception) {
             throw $exception;
         }

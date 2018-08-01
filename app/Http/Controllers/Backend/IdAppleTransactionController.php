@@ -16,11 +16,23 @@ class IdAppleTransactionController extends Controller
         $this->transactionServices = $idAppleTransactionServices;
     }
 
+    /**
+     * Log transaction done.
+     * @param string $user
+     * @param string $idApple
+     * @param int $money
+     * @throws \Exception
+     */
     public function create($user, $idApple, $money)
     {
         $this->transactionServices->createTransaction($user, $idApple, $money);
     }
 
+    /**
+     * Log transaction fail.
+     * @param string $user
+     * @param string $idApple
+     */
     public function createFail($user, $idApple)
     {
         $this->transactionServices->purchaseFail($user, $idApple);

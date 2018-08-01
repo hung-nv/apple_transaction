@@ -40,7 +40,7 @@ class IdAppleTransactionServices
      */
     public function savePackageTransaction($idApple, $money, $username)
     {
-        $idPurchase = IdApplePurchase::getIdPurchaseByIdApple($idApple);
+        $idPurchase = IdApplePurchase::getIdPurchaseByIdApple($idApple, $username);
 
         $user = User::getUserByUsername($username);
 
@@ -50,12 +50,14 @@ class IdAppleTransactionServices
                 'user_id' => (int)$user->id
             ]);
 
+            $totalMoney = $idPurchase->money_purchased + (int)$money;
+
             $idPurchase->update([
                 'total_purchase_successful' => DB::raw('total_purchase_successful + 1'),
-                'money_purchased' => DB::raw('money_purchased + 1')
+                'money_purchased' => DB::raw('money_purchased + ' . $money)
             ]);
 
-            echo 'log thanh cong, tong so tien da nap: ' . number_format($idPurchase->money_purchased + int($money));
+            echo 'log thanh cong, tong so tien da nap: ' . number_format($totalMoney);
         } else {
             echo 'invalid';
         }
@@ -68,15 +70,16 @@ class IdAppleTransactionServices
      */
     public function purchaseFail($username, $idApple)
     {
-        $idPurchase = IdApplePurchase::getIdPurchaseByIdApple($idApple);
+        $idPurchase = IdApplePurchase::getIdPurchaseByIdApple($idApple, $username);
 
-        $user = User::getUserByUsername($username);
+        if ($idPurchase) {
 
-        if ($idPurchase && $user) {
+            $solan = $idPurchase->total_puchase_fail + 1;
+
             $idPurchase->update([
                 'total_puchase_fail' => DB::raw('total_puchase_fail + 1')
             ]);
-            echo 'so lan fail: ' . ($idPurchase->total_puchase_fail + 1);
+            echo 'so lan fail: ' . $solan;
         } else {
             echo 'invalid';
         }

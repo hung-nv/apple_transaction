@@ -112,7 +112,7 @@ class IdApplePurchase extends \Eloquent
      * @param string $device
      * @return IdApplePurchase|Model|null|object
      */
-    public function getOneIdPurchase($userId, $device)
+    public static function getOneIdPurchase($userId, $device)
     {
         return self::where('user_id', $userId)
             ->where('id_device', $device)
@@ -136,6 +136,7 @@ class IdApplePurchase extends \Eloquent
 
             if ($username) {
                 $user = User::getUserByUsername($username);
+
                 $idPurchase = $idPurchase->where('user_id', $user->id);
             }
 
