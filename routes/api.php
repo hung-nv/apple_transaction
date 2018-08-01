@@ -19,4 +19,7 @@ Route::group(['namespace' => 'Backend'], function () {
 
     // delete all selected id apples.
     Route::post('apple/delete-all', 'AppleController@deleteAll');
+
+    // delete all selected id purchases.
+    Route::post('id-purchase/delete-all', 'IdApplePurchaseController@deleteAll');
 });

@@ -31,13 +31,19 @@ class IdApplePurchaseController extends Controller
     }
 
 
-    public function index()
+    /**
+     * Get all id purchases.
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index(Request $request)
     {
-        $idPurchases = $this->idPurchaseServices->getIdPurchases();
+        $dataPurchases = $this->idPurchaseServices->getIdPurchases($request);
 
         return view('backend.idPurchase.index', [
-            'idPurchases' => $idPurchases,
-            'pageSize' => 10
+            'idPurchases' => $dataPurchases['idApples'],
+            'fail' => $dataPurchases['fail'],
+            'pageSize' => $dataPurchases['pageSize']
         ]);
     }
 
@@ -61,5 +67,21 @@ class IdApplePurchaseController extends Controller
     public function deleteHandle($user, $idApple)
     {
         $this->idPurchaseServices->deleteHandle($user, $idApple);
+    }
+
+    /**
+     * Delete all selected id purchases.
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function deleteAll(Request $request)
+    {
+        $this->idPurchaseServices->deleteSelectedIdPurchase($request->all());
+
+        return response()->json([
+            'url' => route('idPurchase.index'),
+            'messages' => 'You have delete successful!'
+        ], 200);
     }
 }

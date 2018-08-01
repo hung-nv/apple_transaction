@@ -8,23 +8,25 @@ declare var require;
 var _ = require('lodash');
 
 // Declare variable.
-let selectedIdApple = [];
+let selectedIdPurchases = [];
 
 /**
  * List Elements of view.
  * @type any
  */
 const ui = {
-    urlDeleteSelectedIdApples: '/api/apple/delete-all'
+    'urlDeleteSelectedIdPurchases': '/api/id-purchase/delete-all',
+    'formPurchases': '#frmSearchIdPurchases',
+    'chkIdPurchases': '.checkboxIdPurchase'
 };
 
-export default class idApple {
+export default class IdPurchases {
     public setUp() {
         this.validateSearch();
     }
 
     public validateSearch() {
-        $('#frmSearchApples').validate({
+        $(ui.formPurchases).validate({
             rules: {
                 'fail': {
                     number: true
@@ -37,29 +39,6 @@ export default class idApple {
     }
 
     /**
-     * Check exist iphone information before create id apples.
-     */
-    public createIdApple() {
-        $.ajax({
-            method: 'get',
-            url: '/api/checkIphoneInformation'
-        }).done(respon => {
-            if (respon.message === 'ok') {
-                window.location.href = respon.url;
-            } else {
-                swal({
-                    type: 'error',
-                    title: 'Fail...',
-                    html: 'You must <a href="' + respon.url + '">create iPhone Information</a> first.'
-                });
-            }
-
-        }).fail(xhr => {
-            doException(xhr);
-        });
-    }
-
-    /**
      * Confirm before delete.
      * @param event
      */
@@ -68,16 +47,18 @@ export default class idApple {
     }
 
     /**
-     * Select id apple.
+     * Select id purchase.
      * @param event
      */
-    public selectIdApple(event) {
+    public selectIdPurchase(event) {
         let element = $(event.target);
         if (element.is(':checked')) {
-            selectedIdApple.push(element.data('id'));
+            // add id purchase to collection.
+            selectedIdPurchases.push(element.data('id'));
             element.parents('tr').addClass("active");
         } else {
-            selectedIdApple.splice($.inArray(element.data('id'), selectedIdApple), 1);
+            // remove id purchase from collection.
+            selectedIdPurchases.splice($.inArray(element.data('id'), selectedIdPurchases), 1);
             element.parents('tr').removeClass("active");
         }
     }
@@ -100,19 +81,19 @@ export default class idApple {
     }
 
     /**
-     * Select all id apples in current page.
+     * Select all id purchases. in current page.
      */
     public selectAll(event) {
         let element = $(event.target);
 
-        // set empty selected id apples.
-        selectedIdApple = [];
+        // set empty selected id purchases..
+        selectedIdPurchases = [];
 
-        // checked all id apples.
+        // checked all id purchases..
         if (element.is(':checked')) {
-            _.forEach($('.checkboxIdApple'), element => {
+            _.forEach($(ui.chkIdPurchases), element => {
                 // push all id apple
-                selectedIdApple.push($(element).data('id'));
+                selectedIdPurchases.push($(element).data('id'));
 
                 // checked id apple
                 $(element).prop('checked', true);
@@ -123,8 +104,8 @@ export default class idApple {
                 }
             });
         } else {
-            // uncheck all id apples.
-            _.forEach($('.checkboxIdApple'), element => {
+            // uncheck all id purchases..
+            _.forEach($(ui.chkIdPurchases), element => {
                 // uncheck id apple.
                 $(element).prop('checked', false);
 
@@ -137,24 +118,24 @@ export default class idApple {
     }
 
     /**
-     * Delete selected id apple.
+     * Delete selected id purchases.
      * @returns {any}
      */
-    public deleteSelectedIdApples() {
+    public deleteSelectedIdPurchases() {
         // if dont' have any selected id apple.
-        if (!selectedIdApple.length) {
+        if (!selectedIdPurchases.length) {
             return swal({
                 type: 'error',
                 title: 'Fail...',
-                text: "You don't select any id apple to delete!"
+                text: "You don't select any id purchase to delete!"
             });
         }
 
         // send ajax to delete
         $.ajax({
-            url: ui.urlDeleteSelectedIdApples,
+            url: ui.urlDeleteSelectedIdPurchases,
             method: 'post',
-            data: {idApples: selectedIdApple}
+            data: {idPurchases: selectedIdPurchases}
         }).done(respon => {
             swal(
                 'Successful!',

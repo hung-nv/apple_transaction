@@ -16,19 +16,19 @@ class MenuSystemTableSeeder extends Seeder
             ['label' => 'Insert', 'icon' => 'icon-plus', 'route' => 'apple.create', 'parent_id' => 1, 'sort' => 1, 'show' => '1,2'],
             ['label' => 'All', 'icon' => 'icon-list', 'route' => 'apple.index', 'parent_id' => 1, 'sort' => 2, 'show' => '1,2'],
 
-            ['label' => 'Credit Card', 'icon' => 'icon-handbag', 'route' => 'creditCard', 'parent_id' => null, 'sort' => 1, 'show' => '1,2'],
+            ['label' => 'Credit Card', 'icon' => 'icon-credit-card', 'route' => 'creditCard', 'parent_id' => null, 'sort' => 1, 'show' => '1,2'],
             ['label' => 'Insert', 'icon' => 'icon-plus', 'route' => 'creditCard.create', 'parent_id' => 4, 'sort' => 1, 'show' => '1,2'],
             ['label' => 'All', 'icon' => 'icon-list', 'route' => 'creditCard.index', 'parent_id' => 4, 'sort' => 2, 'show' => '1,2'],
 
-            ['label' => 'Serial', 'icon' => 'icon-handbag', 'route' => 'serial', 'parent_id' => null, 'sort' => 2, 'show' => '1,2'],
+            ['label' => 'Serial', 'icon' => 'icon-wallet', 'route' => 'serial', 'parent_id' => null, 'sort' => 2, 'show' => '1,2'],
             ['label' => 'Insert', 'icon' => 'icon-plus', 'route' => 'serial.create', 'parent_id' => 7, 'sort' => 1, 'show' => '1,2'],
             ['label' => 'All', 'icon' => 'icon-list', 'route' => 'serial.index', 'parent_id' => 7, 'sort' => 2, 'show' => '1,2'],
 
-            ['label' => 'iPhone Information', 'icon' => 'icon-handbag', 'route' => 'iphoneInformation', 'parent_id' => null, 'sort' => 3, 'show' => '1,2'],
+            ['label' => 'iPhone Information', 'icon' => 'icon-info', 'route' => 'iphoneInformation', 'parent_id' => null, 'sort' => 3, 'show' => '1,2'],
             ['label' => 'Insert', 'icon' => 'icon-plus', 'route' => 'iphoneInformation.create', 'parent_id' => 10, 'sort' => 1, 'show' => '1,2'],
             ['label' => 'All', 'icon' => 'icon-list', 'route' => 'iphoneInformation.index', 'parent_id' => 10, 'sort' => 2, 'show' => '1,2'],
 
-            ['label' => 'Id purchase', 'icon' => 'icon-handbag', 'route' => 'idPurchase.index', 'parent_id' => null, 'sort' => 4, 'show' => '1,2'],
+            ['label' => 'Id purchase', 'icon' => 'icon-diamond ', 'route' => 'idPurchase.index', 'parent_id' => null, 'sort' => 4, 'show' => '1,2'],
 
             ['label' => 'Transaction', 'icon' => 'icon-list', 'route' => 'idTransaction.index', 'parent_id' => null, 'sort' => 5, 'show' => '1,2'],
 

@@ -28,6 +28,7 @@ class AppleController extends Controller
 
     /**
      * @param $idApple
+     * @throws \Exception
      */
     public function forceDestroy($idApple)
     {

@@ -3,5 +3,6 @@ export default {
     'createIdApple': 'pages/CreateIdApple',
     'iPhoneInformation': 'pages/IphoneInformation',
     'creditCard': 'pages/CreditCard',
-    'serial': 'pages/Serial'
+    'serial': 'pages/Serial',
+    'idPurchase': 'pages/IdPurchases'
 };

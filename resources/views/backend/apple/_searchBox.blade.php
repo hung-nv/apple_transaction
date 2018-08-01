@@ -1,5 +1,5 @@
 <div class="row">
-    <form action="{{ route('apple.index') }}" method="get">
+    <form action="{{ route('apple.index') }}" method="get" id="frmSearchApples">
         <div class="col-md-7 col-sm-12">
             <div class="dataTables_length" id="datatable_ajax_length">
                 <label>
@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-5 col-sm-12">
             <div class="table-group-actions pull-right">
-                <span> </span>
+                <span class="text-error"> </span>
                 <input placeholder="Total fail" name="fail" value="@if($fail != '-1') {{ $fail }} @endif"
                        class="form-control input-inline input-sm input-small table-group-action-input">
                 <button class="btn btn-sm green table-group-action-submit" type="submit">

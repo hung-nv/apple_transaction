@@ -89,11 +89,21 @@ class IdApplePurchase extends \Eloquent
 
     /**
      * Get all id purchases.
+     * @param int $totalFail
+     * @param int $pageSize
      * @return mixed
      */
-    public static function getIdPurchases()
+    public static function getIdPurchases($totalFail, $pageSize)
     {
-        return self::orderByDesc('created_at')->me()->paginate(20);
+        $idPurchases = self::orderByDesc('created_at')->me();
+
+        if ($totalFail != '-1') {
+            $idPurchases = $idPurchases->where('total_puchase_fail', $totalFail);
+        }
+
+        $idPurchases = $idPurchases->paginate($pageSize);
+
+        return $idPurchases;
     }
 
     /**

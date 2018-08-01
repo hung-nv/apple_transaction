@@ -4,6 +4,7 @@
 <![endif]-->
 <!-- BEGIN CORE PLUGINS -->
 <script src="{{ asset('/admin/assets/global/plugins/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/admin/assets/global/plugins/jquery-validation/js/jquery.validate.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/admin/assets/global/plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/admin/assets/global/plugins/js.cookie.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('/admin/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js') }}"

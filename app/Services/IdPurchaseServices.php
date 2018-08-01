@@ -57,11 +57,26 @@ class IdPurchaseServices
 
     /**
      * Get all id purchase.
-     * @return mixed
+     * @param $request
+     * @return array
      */
-    public function getIdPurchases()
+    public function getIdPurchases($request)
     {
-        return IdApplePurchase::getIdPurchases();
+        $fail = -1;
+        if (isset($request->fail) && $request->fail != '-1' && is_numeric($request->fail)) {
+            $fail = $request->fail;
+        }
+
+        $pageSize = 10;
+        if (isset($request->page_size) && is_numeric($request->page_size)) {
+            $pageSize = $request->page_size;
+        }
+
+        $idPurchases = IdApplePurchase::getIdPurchases($fail, $pageSize);
+
+        $return = ['fail' => $fail, 'pageSize' => $pageSize, 'idApples' => $idPurchases];
+
+        return $return;
     }
 
     /**
@@ -102,6 +117,20 @@ class IdPurchaseServices
             echo 'da xoa';
         } else {
             echo 'invalid';
+        }
+    }
+
+    /**
+     * Delete all selected id purchases.
+     * @param $data
+     * @throws \Exception
+     */
+    public function deleteSelectedIdPurchase($data)
+    {
+        try {
+            Apple::destroy($data['idPurchases']);
+        } catch (\Exception $exception) {
+            throw $exception;
         }
     }
 }

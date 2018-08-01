@@ -4,7 +4,7 @@
         <thead>
         <tr>
             <th>
-                <input type="checkbox"/>
+                <input type="checkbox" v-on:change="selectAll"/>
             </th>
             <th> Apple ID</th>
             <th> Device</th>
@@ -23,7 +23,8 @@
 
                 <tr class="odd gradeX" role="row">
                     <td>
-                        <input type="checkbox" class="checkboxIdApple" data-id="{{ $i->id }}"/>
+                        <input type="checkbox" class="checkboxIdPurchase" data-id="{{ $i->id }}"
+                               v-on:change="selectIdPurchase"/>
                     </td>
                     <td>{{ $i->apple->email }}</td>
                     <td>{{ $i->id_device }}</td>
@@ -31,12 +32,12 @@
                     <td>{{ $i->language }}</td>
                     <td>{{ $i->total_purchase_successful }}</td>
                     <td>{{ $i->total_puchase_fail }}</td>
-                    <td>{{ $i->money_purchased }}</td>
+                    <td>{{ number_format($i->money_purchased) }}</td>
                     <td>
                         <form action="{{ route('idPurchase.destroy', $i->id) }}" method="POST">
                             {{ method_field('DELETE') }}
                             {{ csrf_field() }}
-                            <button type="button" class="btn red btn-xs">
+                            <button type="button" class="btn red btn-xs" v-on:click="confirmDelete">
                                 Delete
                             </button>
                         </form>
@@ -49,6 +50,6 @@
     </table>
 
     @if(!empty($idPurchases))
-        {{ $idPurchases->links() }}
+        {{ $idPurchases->appends(['page_size' => $pageSize, 'fail' => $fail])->links() }}
     @endif
 </div>
