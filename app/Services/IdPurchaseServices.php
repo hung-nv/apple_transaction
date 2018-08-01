@@ -133,4 +133,20 @@ class IdPurchaseServices
             throw $exception;
         }
     }
+
+    /**
+     * Delete id purchase.
+     * @param int $purchaseId
+     * @throws \Exception
+     */
+    public function deleteIdPurchase($purchaseId)
+    {
+        try {
+            $idPurchase = IdApplePurchase::findOrFail($purchaseId);
+
+            $idPurchase->delete();
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
+    }
 }

@@ -84,4 +84,17 @@ class IdApplePurchaseController extends Controller
             'messages' => 'You have delete successful!'
         ], 200);
     }
+
+    /**
+     * Delete id purchase.
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
+     */
+    public function destroy($id)
+    {
+        $this->idPurchaseServices->deleteIdPurchase($id);
+
+        return redirect()->route('idPurchase.index')->with(['success_message' => 'Delete successful']);
+    }
 }
