@@ -33,7 +33,7 @@
         <label class="control-label col-md-3">Role</label>
         <div class="col-md-4">
             <select class="form-control" name="role">
-                <option value="2" @if($role == 2) selected @endif>Buyer</option>
+                <option value="2" @if($role == 2) selected @endif>Member</option>
                 <option value="1" @if($role == 1) selected @endif>Administrator</option>
             </select>
         </div>

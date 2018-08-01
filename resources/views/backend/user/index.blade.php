@@ -12,6 +12,8 @@
     Manage users
 @endsection
 
+@section('pageId', 'users')
+
 @section('breadcrumbs')
     <a href="{{ route('user.index') }}">Users</a>
 @endsection
@@ -69,7 +71,9 @@
                                             {{ csrf_field() }}
                                             <a href="{{ route('user.edit', ['user' => $i->id]) }}"
                                                class="btn red btn-sm">Update</a>
-                                            <button type="submit" class="btn red btn-sm btn-delete">Delete</button>
+                                            <button type="button" class="btn red btn-sm btn-delete"
+                                                    v-on:click="confirmDelete">Delete
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
@@ -83,18 +87,3 @@
         </div>
     </div>
 @endsection
-
-@push('script')
-    <script src="{{ asset('/admin/assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/datatables/datatables.min.js') }}"
-            type="text/javascript"></script>
-    <script src="{{ asset('/admin/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}"
-            type="text/javascript"></script>
-
-    <script type="text/javascript">
-        $(function () {
-            pageDatatable('#data-users');
-            confirmBeforeDelete('#data-users', 'Do you want to delete this?');
-        });
-    </script>
-@endpush

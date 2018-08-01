@@ -5,5 +5,6 @@ export default {
     'creditCard': 'pages/CreditCard',
     'serial': 'pages/Serial',
     'idPurchase': 'pages/IdPurchases',
-    'idTransaction': 'pages/IdTransaction'
+    'idTransaction': 'pages/IdTransaction',
+    'users': 'pages/Users'
 };
