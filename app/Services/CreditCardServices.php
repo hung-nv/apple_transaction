@@ -9,7 +9,7 @@ class CreditCardServices
     /**
      * Get one credit card.
      */
-    public function getOneCredit()
+    public function getOneCredit($username)
     {
         $creditCard = CreditCard::inRandomOrder()->first();
         if ($creditCard) {

@@ -23,7 +23,7 @@ class IdApplePurchase extends \Eloquent
         'imei',
         'language',
         'apple_id',
-        'serial_id',
+        'serial',
         'total_purchase_successful',
         'total_puchase_fail',
         'money_purchased',
@@ -48,15 +48,6 @@ class IdApplePurchase extends \Eloquent
     public function apple()
     {
         return $this->belongsTo('App\Models\Apple', 'apple_id');
-    }
-
-    /**
-     * Define relationship belongs to.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function serial()
-    {
-        return $this->belongsTo('App\Models\Serial');
     }
 
     /**

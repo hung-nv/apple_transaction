@@ -27,29 +27,32 @@ class AppleController extends Controller
     }
 
     /**
+     * @param $user
      * @param $idApple
      * @throws \Exception
      */
-    public function forceDestroy($idApple)
+    public function forceDestroy($user, $idApple)
     {
-        $this->idAppleServices->forceDestroy($idApple);
+        $this->idAppleServices->forceDestroy($user, $idApple);
     }
 
     /**
      * Log if add information fail.
      * @param string $idApple
+     * @param string $user
      */
-    public function addInformationFail($idApple)
+    public function addInformationFail($user, $idApple)
     {
-        $this->idAppleServices->addInformationFail($idApple);
+        $this->idAppleServices->addInformationFail($user, $idApple);
     }
 
     /**
+     * @param string $user
      * @throws \Exception
      */
-    public function getOneIdApple()
+    public function getOneIdApple($user)
     {
-        $this->idAppleServices->getOneIdApple();
+        $this->idAppleServices->getOneIdApple($user);
     }
 
     /**

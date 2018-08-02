@@ -34,10 +34,8 @@ class IdPurchaseServices
         } else {
             // get id apple.
             $apple = Apple::where('email', $idApple)->first();
-            // get serial.
-            $serial = Serial::where('number', $number)->first();
 
-            if (empty($apple) || empty($serial)) {
+            if (empty($apple)) {
                 $message = 'thong tin sai';
             } else {
                 IdApplePurchase::firstOrCreate([
@@ -45,7 +43,7 @@ class IdPurchaseServices
                     'imei' => $imei,
                     'language' => $lang,
                     'apple_id' => $apple->id,
-                    'serial_id' => $serial->id,
+                    'serial' => $number,
                     'user_id' => $user->id
                 ]);
                 $message = 'thanh cong';

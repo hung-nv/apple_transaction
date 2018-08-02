@@ -57,16 +57,16 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Backend'], function () {
 
 Route::group(['namespace' => 'Backend'], function () {
     // get one id apple to use.
-    Route::get('get-id-apple', 'AppleController@getOneIdApple');
+    Route::get('get-id-apple/{user}', 'AppleController@getOneIdApple');
 
     // log case add information fail
-    Route::get('id-apple/fail/{idApple}', 'AppleController@addInformationFail');
+    Route::get('id-apple/fail/{user}/{idApple}', 'AppleController@addInformationFail');
 
     // handle delete force id apple
-    Route::get('id-apple/delete/{idApple}', 'AppleController@forceDestroy');
+    Route::get('id-apple/delete/{user}/{idApple}', 'AppleController@forceDestroy');
 
     // get one credit card to use.
-    Route::get('get-credit', 'CreditCardController@getOneCredit');
+    Route::get('get-credit/{user}', 'CreditCardController@getOneCredit');
 
     // get one serial to use.
     Route::get('get-serial', 'SerialController@getOneSerial');

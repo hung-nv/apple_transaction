@@ -25,8 +25,7 @@ class CreateIdApplePurchasesTable extends Migration
             $table->integer('apple_id')->unsigned();
             $table->foreign('apple_id')->references('id')->on('apples');
 
-            $table->integer('serial_id')->unsigned();
-            $table->foreign('serial_id')->references('id')->on('serials');
+            $table->string('serial', 100);
 
             $table->tinyInteger('total_purchase_successful')->default(0);
             $table->tinyInteger('total_puchase_fail')->default(0);

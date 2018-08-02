@@ -10,13 +10,14 @@ class IdAppleServices
 {
     /**
      * Force deleting id apple.
+     * @param $username
      * @param $idApple
      * @throws \Exception
      */
-    public function forceDestroy($idApple)
+    public function forceDestroy($username, $idApple)
     {
         // get id apple
-        $apple = Apple::where('email', $idApple)->first();
+        $apple = Apple::getIdAppleByEmailAndUsername($username, $idApple);
 
         // if exist
         if ($apple) {
@@ -35,10 +36,10 @@ class IdAppleServices
      * Log if add information fail.
      * @param string $idApple
      */
-    public function addInformationFail($idApple)
+    public function addInformationFail($username, $idApple)
     {
         // get id apple
-        $apple = Apple::withTrashed()->where('email', $idApple)->first();
+        $apple = Apple::getIdAppleByEmailAndUsername($username, $idApple);
 
         // get current add fail.
         $number = $apple->total_fail;
@@ -57,9 +58,11 @@ class IdAppleServices
     /**
      * Get one id apple.
      */
-    public function getOneIdApple()
+    public function getOneIdApple($username)
     {
-        $idApple = Apple::inRandomOrder()->first();
+        // get random id apple by username.
+        $idApple = Apple::getRandomIdApple($username);
+
         if ($idApple) {
             $idApple->delete();
             echo $idApple->email . '|' . $idApple->password . '|' . $idApple->iphone_internal_name . '|'

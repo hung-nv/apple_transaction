@@ -19,7 +19,11 @@ class CreateCreditCardsTable extends Migration
             $table->string('number');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('is_used')->default(false);
+            $table->tinyInteger('total_success')->default(0);
+            $table->tinyInteger('total_fail')->default(0);
+
+            $table->softDeletes();
+
             $table->timestamps();
         });
     }

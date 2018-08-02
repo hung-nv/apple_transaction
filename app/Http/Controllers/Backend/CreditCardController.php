@@ -17,9 +17,12 @@ class CreditCardController extends Controller
         $this->creditCardServices = $creditCardServices;
     }
 
-    public function getOneCredit()
+    /**
+     * @param string $user
+     */
+    public function getOneCredit($user)
     {
-        $this->creditCardServices->getOneCredit();
+        $this->creditCardServices->getOneCredit($user);
     }
 
     /**
