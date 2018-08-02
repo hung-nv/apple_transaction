@@ -65,8 +65,19 @@ Route::group(['namespace' => 'Backend'], function () {
     // handle delete force id apple
     Route::get('id-apple/delete/{user}/{idApple}', 'AppleController@forceDestroy');
 
+    // handle add credit card.
+    Route::get('add-credit/{user}/{number}', 'CreditCardController@addHandler');
+
     // get one credit card to use.
     Route::get('get-credit/{user}', 'CreditCardController@getOneCredit');
+
+    // log add credit card successful.
+    Route::get('done-credit/{user}/{number}', 'CreditCardController@addCardDone');
+
+    // log add credit card fail.
+    Route::get('fail-credit/{user}/{number}', 'CreditCardController@addCardFail');
+
+    // delete handle credit card.
 
     // get one serial to use.
     Route::get('get-serial', 'SerialController@getOneSerial');

@@ -26,6 +26,26 @@ class CreditCardController extends Controller
     }
 
     /**
+     * Log add credit card successful.
+     * @param $user
+     * @param $number
+     */
+    public function addCardDone($user, $number)
+    {
+        $this->creditCardServices->addCreditDone($user, $number);
+    }
+
+    /**
+     * Log add credit card fail.
+     * @param $user
+     * @param $number
+     */
+    public function addCardFail($user, $number)
+    {
+        $this->creditCardServices->addCreditFail($user, $number);
+    }
+
+    /**
      * @return \Illuminate\Http\RedirectResponse
      */
     public function deleteAll()
@@ -68,6 +88,16 @@ class CreditCardController extends Controller
         return view('backend.creditCard.index', [
             'data' => $creditCards
         ]);
+    }
+
+    /**
+     * Add credit card by api.
+     * @param string $user
+     * @param string $number
+     */
+    public function addHandler($user, $number)
+    {
+        $this->creditCardServices->addCreditHandler($user, $number);
     }
 
     /**

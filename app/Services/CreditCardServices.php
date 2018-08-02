@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\CreditCard;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class CreditCardServices
 {
@@ -11,14 +13,59 @@ class CreditCardServices
      */
     public function getOneCredit($username)
     {
-        $creditCard = CreditCard::inRandomOrder()->first();
+        $creditCard = CreditCard::getCreditCardByUsername($username);
+
         if ($creditCard) {
             echo $creditCard->number;
-            $creditCard->delete();
         } else {
             echo 'het';
         }
     }
+
+    /**
+     * Log if add credit card successful.
+     * @param $user
+     * @param $number
+     */
+    public function addCreditDone($user, $number)
+    {
+        $creditCard = CreditCard::getCreditCardByUserAndNumber($user, $number);
+
+        $solan = $creditCard->total_success + 1;
+
+        if ($creditCard) {
+            $creditCard->update([
+                'total_success' => DB::raw('total_success + 1')
+            ]);
+
+            echo 'so lan add thanh cong: '.$solan;
+        } else {
+            echo 'sai thong tin';
+        }
+    }
+
+    /**
+     * Log if add credit card fail.
+     * @param string $user
+     * @param string $number
+     */
+    public function addCreditFail($user, $number)
+    {
+        $creditCard = CreditCard::getCreditCardByUserAndNumber($user, $number);
+
+        $solan = $creditCard->total_success + 1;
+
+        if ($creditCard) {
+            $creditCard->update([
+                'total_fail' => DB::raw('total_fail + 1')
+            ]);
+
+            echo 'so lan add fail: '.$solan;
+        } else {
+            echo 'sai thong tin';
+        }
+    }
+
     /**
      * Get all credit cards.
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
@@ -78,5 +125,30 @@ class CreditCardServices
     public function deleteAll()
     {
         CreditCard::truncate();
+    }
+
+    /**
+     * Add credit card by api.
+     * @param $username
+     * @param $number
+     */
+    public function addCreditHandler($username, $number)
+    {
+        $user = User::getUserByUsername($username);
+
+        if (empty($user)) {
+            echo 'user khong dung';
+        }
+
+        $creditCard = CreditCard::create([
+            'user_id' => $user->id,
+            'number' => $number
+        ]);
+
+        if ($creditCard) {
+            echo 'thanh cong';
+        } else {
+            echo 'fail';
+        }
     }
 }

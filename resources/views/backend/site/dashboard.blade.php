@@ -30,13 +30,13 @@
                 </div>
                 <div class="portlet-body">
                     <h4 class="block">Để lấy 1 id apple random trong kho.</h4>
-                    <code>/get-id-apple</code>
+                    <code>/get-id-apple/{user}</code>
 
                     <h4 class="block">Để log lại trường hợp không add được thông tin cho id apple</h4>
-                    <code>/id-apple/fail/{idApple}</code>
+                    <code>/id-apple/fail/{user}/{idApple}</code>
 
                     <h4 class="block"> Để xóa toàn bộ dữ liệu của 1 id apple trong kho (nếu add fail quá nhiều lần)</h4>
-                    <code>/id-apple/delete/{idApple}</code>
+                    <code>/id-apple/delete/{user}/{idApple}</code>
 
                     <h4 class="block"> Để lấy 1 credit card random trong kho.</h4>
                     <code>/get-credit</code>
