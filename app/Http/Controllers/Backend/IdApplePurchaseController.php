@@ -51,11 +51,12 @@ class IdApplePurchaseController extends Controller
      * Get a id purchase to use.
      * @param string $user
      * @param string $device
+     * @param int $mintime
      * @throws \Exception
      */
-    public function getOneIdPurchase($user, $device)
+    public function getOneIdPurchase($user, $device, $mintime)
     {
-        $this->idPurchaseServices->getOneIdPurchase($user, $device);
+        $this->idPurchaseServices->getOneIdPurchase($user, $device, $mintime);
     }
 
     /**

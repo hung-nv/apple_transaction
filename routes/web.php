@@ -87,7 +87,7 @@ Route::group(['namespace' => 'Backend'], function () {
     Route::get('id-purchase/{user}/{device}/{idApple}/{number}/{imei}/{lang}', 'IdApplePurchaseController@create');
 
     // get one id purchase to use.
-    Route::get('get-id-purchase/{user}/{device}', 'IdApplePurchaseController@getOneIdPurchase');
+    Route::get('get-id-purchase/{user}/{device}/{mintime}', 'IdApplePurchaseController@getOneIdPurchase');
 
     // log purchase successful.
     Route::get('done-purchase/{user}/{idApple}/{money}', 'IdAppleTransactionController@create');

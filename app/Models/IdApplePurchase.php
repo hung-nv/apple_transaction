@@ -72,11 +72,13 @@ class IdApplePurchase extends \Eloquent
     /**
      * With condition in last 3 day.
      * @param $query
+     * @param int $mintime : total hour.
      * @return mixed
      */
-    public function scopeTimeDelay($query)
+    public function scopeTimeDelay($query, $mintime)
     {
-        return $query->havingRaw('(UNIX_TIMESTAMP(now()) - UNIX_TIMESTAMP(created_at)) < ?', [259200]);
+        $milisecond = (int)$mintime * 60 * 60;
+        return $query->havingRaw('(UNIX_TIMESTAMP(now()) - UNIX_TIMESTAMP(created_at)) > ?', [$milisecond]);
     }
 
     /**
@@ -102,14 +104,15 @@ class IdApplePurchase extends \Eloquent
      * Get Id purchase. (can chon random trong 1 khoang thoi gian, neu khong se bi lap lai)
      * @param int $userId
      * @param string $device
+     * @param int $mintime
      * @return IdApplePurchase|Model|null|object
      */
-    public static function getOneIdPurchase($userId, $device)
+    public static function getOneIdPurchase($userId, $device, $mintime)
     {
         return self::where('user_id', $userId)
             ->where('id_device', $device)
             ->inRandomOrder()
-            ->timeDelay()
+            ->timeDelay($mintime)
             ->first();
     }
 
@@ -148,7 +151,7 @@ class IdApplePurchase extends \Eloquent
         $model = DB::table('id_apple_purchases as a')
             ->select('a.id as purchaseId')
             ->join('apples as b', 'b.id', '=', 'a.apple_id')
-            ->where('b.email', 'like', '%'.$email.'%')
+            ->where('b.email', 'like', '%' . $email . '%')
             ->first();
 
         return $model ? $model->purchaseId : null;

@@ -45,7 +45,7 @@ class CreditCardServices
 
         if ($creditCard) {
             $solan = $creditCard->total_success + 1;
-            
+
             $creditCard->update([
                 'total_success' => DB::raw('total_success + 1')
             ]);

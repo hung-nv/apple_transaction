@@ -81,9 +81,10 @@ class IdPurchaseServices
      * Get one id purchase to use.
      * @param $username
      * @param $device
+     * @param $mintime
      * @throws \Exception
      */
-    public function getOneIdPurchase($username, $device)
+    public function getOneIdPurchase($username, $device, $mintime)
     {
         $user = User::where('username', $username)->first();
 
@@ -91,9 +92,9 @@ class IdPurchaseServices
             echo 'invalid';
         } else {
             // lay ra id duoc ngam de su dung.
-            $idpurchase = IdApplePurchase::getOneIdPurchase($user->id, $device);
+            $idpurchase = IdApplePurchase::getOneIdPurchase($user->id, $device, $mintime);
             if ($idpurchase) {
-                echo $idpurchase->apple->email . '|' . $idpurchase->apple->password;
+                echo $idpurchase->apple->email . '|' . $idpurchase->apple->password . '|' . $idpurchase->serial;
             } else {
                 echo 'khong co';
             }
