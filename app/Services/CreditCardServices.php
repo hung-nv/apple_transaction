@@ -43,12 +43,12 @@ class CreditCardServices
     {
         $creditCard = CreditCard::getCreditCardByUserAndNumber($username, $number);
 
-        $solan = $creditCard->total_success + 1;
-
         if ($creditCard) {
             $creditCard->update([
                 'total_success' => DB::raw('total_success + 1')
             ]);
+
+            $solan = $creditCard->total_success + 1;
 
             echo 'so lan add thanh cong: ' . $solan;
         } else {
@@ -65,12 +65,12 @@ class CreditCardServices
     {
         $creditCard = CreditCard::getCreditCardByUserAndNumber($username, $number);
 
-        $solan = $creditCard->total_success + 1;
-
         if ($creditCard) {
             $creditCard->update([
                 'total_fail' => DB::raw('total_fail + 1')
             ]);
+
+            $solan = $creditCard->total_fail + 1;
 
             echo 'so lan add fail: ' . $solan;
         } else {
