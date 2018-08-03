@@ -57,7 +57,7 @@
                     <code>/id-purchase/{user}/{device}/{idApple}/{serial}/{imei}/{lang}</code>
 
                     <h4 class="block"> Để lấy ra id apple đã ngâm (lấy ra ngẫu nhiên 1 id apple đã ngâm được 3 ngày trở lên)</h4>
-                    <code>/get-id-purchase/{user}/{device}</code>
+                    <code>/get-id-purchase/{user}/{device}/{minHour}</code>
 
                     <h4 class="block"> Để ghi log lại trường hợp nạp tiền thành công</h4>
                     <code>/done-purchase/{user}/{idApple}/{money}</code>
@@ -70,8 +70,10 @@
 
                     <div class="note note-info margin-top-30">
                         <p>
-                            user: là username dùng đăng nhập trong admin<br/>
-                            device: là id của thiết bị, 1 thiết bị chỉ gọi ra những id apple mà nó đã add
+                            user: là username dùng đăng nhập trong admin.<br />
+                            device: là id của thiết bị, 1 thiết bị chỉ gọi ra những id apple mà nó đã add.<br />
+                            minHour: là số giờ tối thiểu mà id đã được ngâm.<br />
+                            idApple: là id apple.
                         </p>
                     </div>
 
