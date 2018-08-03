@@ -63,16 +63,26 @@ class IdAppleTransaction extends \Eloquent
 
 
     /**
-     * Get statistic by day.
+     * Get statistic.
+     * @param $type
+     * @param $date
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public static function getStatistic()
+    public static function getStatistic($type, $date)
     {
-        $statistic = DB::table('id_apple_transactions')
-            ->select(DB::raw('date(created_at) as date'), DB::raw('sum(money) as money'))
-            ->groupBy(DB::raw('date(created_at)'))
-            ->orderByDesc(DB::raw('date(created_at)'))
-            ->paginate(20);
+        if ($type === 'day') {
+            $statistic = DB::table('id_apple_transactions')
+                ->select(DB::raw('date(created_at) as time'), DB::raw('sum(money) as money'))
+                ->groupBy(DB::raw('date(created_at)'))
+                ->orderByDesc(DB::raw('date(created_at)'));
+
+            if ($date && $date !== '-1') {
+                $statistic = $statistic->where(DB::raw('date(created_at)'), $date);
+            }
+        }
+
+        $statistic = $statistic->paginate(20);
+
         return $statistic;
     }
 }

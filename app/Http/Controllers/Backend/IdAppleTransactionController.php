@@ -57,9 +57,10 @@ class IdAppleTransactionController extends Controller
 
     public function statistic(Request $request)
     {
-        $statistic = $this->transactionServices->statistic($request);
+        $dataStatistic = $this->transactionServices->statistic($request);
         return view('backend.idTransaction.statistic', [
-            'statistic' => $statistic
+            'statistic' => $dataStatistic['statistic'],
+            'date' => $dataStatistic['date']
         ]);
     }
 }

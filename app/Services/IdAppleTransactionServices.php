@@ -110,10 +110,29 @@ class IdAppleTransactionServices
         return $return;
     }
 
-
+    /**
+     * Get statistic.
+     * @param $request
+     * @return array
+     */
     public function statistic($request)
     {
-        $dataStatistic = IdAppleTransaction::getStatistic();
-        return $dataStatistic;
+        $type = $request->type;
+        if (empty($type)) {
+            $type = 'day';
+        }
+
+        $date = $request->date;
+        if (empty($date)) {
+            $date = '-1';
+        }
+
+        $dataStatistic = IdAppleTransaction::getStatistic($type, $date);
+
+        $return = [
+            'date' => $date,
+            'statistic' => $dataStatistic
+        ];
+        return $return;
     }
 }

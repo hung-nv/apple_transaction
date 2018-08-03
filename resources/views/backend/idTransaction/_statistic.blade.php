@@ -12,7 +12,7 @@
             @foreach($statistic as $i)
 
                 <tr class="odd gradeX" role="row">
-                    <td>{{ $i->date }}</td>
+                    <td>{{ $i->time }}</td>
                     <td>{{ number_format($i->money) }}</td>
                 </tr>
             @endforeach
@@ -22,6 +22,6 @@
     </table>
 
     @if(!empty($statistic))
-        {{ $statistic->links() }}
+        {{ $statistic->appends(['date' => $date])->links() }}
     @endif
 </div>
