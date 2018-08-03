@@ -38,8 +38,17 @@
                     <h4 class="block"> Để xóa toàn bộ dữ liệu của 1 id apple trong kho (nếu add fail quá nhiều lần)</h4>
                     <code>/id-apple/delete/{user}/{idApple}</code>
 
+                    <h4 class="block"> Để insert card vào kho.</h4>
+                    <code>/add-credit/{user}/{number}</code>
+
                     <h4 class="block"> Để lấy 1 credit card random trong kho.</h4>
-                    <code>/get-credit</code>
+                    <code>/get-credit/{user}</code>
+
+                    <h4 class="block"> Để ghi log lại add card thành công.</h4>
+                    <code>/done-credit/{user}/{number}</code>
+
+                    <h4 class="block"> Để ghi log lại add card thất bại.</h4>
+                    <code>/fail-credit/{user}/{number}</code>
 
                     <h4 class="block"> Để lấy 1 serial random trong kho.</h4>
                     <code>/get-serial</code>

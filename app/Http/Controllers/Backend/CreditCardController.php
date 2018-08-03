@@ -45,6 +45,12 @@ class CreditCardController extends Controller
         $this->creditCardServices->addCreditFail($user, $number);
     }
 
+    public function deleteHandle($user, $number)
+    {
+        $this->creditCardServices->deleteHandle($user, $number);
+    }
+
+
     /**
      * @return \Illuminate\Http\RedirectResponse
      */

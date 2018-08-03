@@ -22,14 +22,26 @@ class CreditCardServices
         }
     }
 
+    public function deleteHandle($username, $number)
+    {
+        $creditCard = CreditCard::getCreditCardByUserAndNumber($username, $number);
+
+        if ($creditCard) {
+            $creditCard->delete();
+            echo 'xoa thanh cong';
+        } else {
+            echo 'fail';
+        }
+    }
+
     /**
      * Log if add credit card successful.
-     * @param $user
+     * @param $username
      * @param $number
      */
-    public function addCreditDone($user, $number)
+    public function addCreditDone($username, $number)
     {
-        $creditCard = CreditCard::getCreditCardByUserAndNumber($user, $number);
+        $creditCard = CreditCard::getCreditCardByUserAndNumber($username, $number);
 
         $solan = $creditCard->total_success + 1;
 
@@ -38,7 +50,7 @@ class CreditCardServices
                 'total_success' => DB::raw('total_success + 1')
             ]);
 
-            echo 'so lan add thanh cong: '.$solan;
+            echo 'so lan add thanh cong: ' . $solan;
         } else {
             echo 'sai thong tin';
         }
@@ -49,9 +61,9 @@ class CreditCardServices
      * @param string $user
      * @param string $number
      */
-    public function addCreditFail($user, $number)
+    public function addCreditFail($username, $number)
     {
-        $creditCard = CreditCard::getCreditCardByUserAndNumber($user, $number);
+        $creditCard = CreditCard::getCreditCardByUserAndNumber($username, $number);
 
         $solan = $creditCard->total_success + 1;
 
@@ -60,7 +72,7 @@ class CreditCardServices
                 'total_fail' => DB::raw('total_fail + 1')
             ]);
 
-            echo 'so lan add fail: '.$solan;
+            echo 'so lan add fail: ' . $solan;
         } else {
             echo 'sai thong tin';
         }

@@ -78,6 +78,7 @@ Route::group(['namespace' => 'Backend'], function () {
     Route::get('fail-credit/{user}/{number}', 'CreditCardController@addCardFail');
 
     // delete handle credit card.
+    Route::get('delete-credit/{user}/{number}', 'CreditCardController@deleteHandle');
 
     // get one serial to use.
     Route::get('get-serial', 'SerialController@getOneSerial');
