@@ -53,4 +53,13 @@ class IdAppleTransactionController extends Controller
             'email' => $dataTransaction['email']
         ]);
     }
+
+
+    public function statistic(Request $request)
+    {
+        $statistic = $this->transactionServices->statistic($request);
+        return view('backend.idTransaction.statistic', [
+            'statistic' => $statistic
+        ]);
+    }
 }

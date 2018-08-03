@@ -30,23 +30,24 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Backend'], function () {
         Route::put('user/update-account', ['as' => 'user.putUpdateAccount', 'uses' => 'UserController@account']);
 
         // route for id apples
-	    Route::resource('apple', 'AppleController');
+        Route::resource('apple', 'AppleController');
 
-	    // route for credit card
-	    Route::resource('creditCard', 'CreditCardController');
-        Route::get('creditCard/deleteAll', ['as' => 'creditCard.deleteAll', 'uses' => 'CreditCardController@deleteAll'] );
+        // route for credit card
+        Route::resource('creditCard', 'CreditCardController');
+        Route::get('creditCard/deleteAll', ['as' => 'creditCard.deleteAll', 'uses' => 'CreditCardController@deleteAll']);
 
-	    // route for serial
-	    Route::resource('serial', 'SerialController');
-        Route::get('serial/deleteAll', ['as' => 'serial.deleteAll', 'uses' => 'SerialController@deleteAll'] );
+        // route for serial
+        Route::resource('serial', 'SerialController');
+        Route::get('serial/deleteAll', ['as' => 'serial.deleteAll', 'uses' => 'SerialController@deleteAll']);
 
         // route for iphone Information
-	    Route::resource('iphoneInformation', 'IphoneInformationController');
-	    Route::get('iphoneInformation/deleteAll', ['as' => 'iphoneInformation.deleteAll', 'uses' => 'IphoneInformationController@deleteAll'] );
+        Route::resource('iphoneInformation', 'IphoneInformationController');
+        Route::get('iphoneInformation/deleteAll', ['as' => 'iphoneInformation.deleteAll', 'uses' => 'IphoneInformationController@deleteAll']);
 
-	    Route::resource('idPurchase', 'IdApplePurchaseController', ['only' => ['index', 'destroy', 'create']]);
+        Route::resource('idPurchase', 'IdApplePurchaseController', ['only' => ['index', 'destroy', 'create']]);
 
-	    Route::resource('idTransaction', 'IdAppleTransactionController', ['only' => ['index', 'create']]);
+        Route::resource('idTransaction', 'IdAppleTransactionController', ['only' => ['index', 'create']]);
+        Route::get('idTransaction/statistic', ['as' => 'idTransaction.statistic', 'uses' => 'IdAppleTransactionController@statistic']);
     });
 
     Route::group(['middleware' => 'checkrole:1'], function () {

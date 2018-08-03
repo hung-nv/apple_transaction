@@ -109,4 +109,11 @@ class IdAppleTransactionServices
 
         return $return;
     }
+
+
+    public function statistic($request)
+    {
+        $dataStatistic = IdAppleTransaction::getStatistic();
+        return $dataStatistic;
+    }
 }

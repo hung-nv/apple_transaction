@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <meta content="" name="author"/>
     <meta name="_token" content="{!! csrf_token() !!}"/>
-    <link rel="shortcut icon" href="{{ asset('/admin/images/favicon.ico') }}"/>
+    <link rel="shortcut icon" href="{{ asset('favico/favicon.ico') }}"/>
 
     @include('backend.layouts.css.core')
     @yield('style')

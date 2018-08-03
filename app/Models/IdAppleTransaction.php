@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class IdAppleTransaction extends \Eloquent
 {
@@ -58,5 +59,20 @@ class IdAppleTransaction extends \Eloquent
         $idTransactions = $idTransactions->paginate($pageSize);
 
         return $idTransactions;
+    }
+
+
+    /**
+     * Get statistic by day.
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public static function getStatistic()
+    {
+        $statistic = DB::table('id_apple_transactions')
+            ->select(DB::raw('date(created_at) as date'), DB::raw('sum(money) as money'))
+            ->groupBy(DB::raw('date(created_at)'))
+            ->orderByDesc(DB::raw('date(created_at)'))
+            ->paginate(20);
+        return $statistic;
     }
 }

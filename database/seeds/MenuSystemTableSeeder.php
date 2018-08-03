@@ -30,11 +30,13 @@ class MenuSystemTableSeeder extends Seeder
 
             ['label' => 'Id purchase', 'icon' => 'icon-diamond ', 'route' => 'idPurchase.index', 'parent_id' => null, 'sort' => 4, 'show' => '1,2'],
 
-            ['label' => 'Transaction', 'icon' => 'icon-list', 'route' => 'idTransaction.index', 'parent_id' => null, 'sort' => 5, 'show' => '1,2'],
+            ['label' => 'Transaction', 'icon' => 'icon-list', 'route' => 'idTransaction.index', 'parent_id' => null, 'sort' => 6, 'show' => '1,2'],
 
-            ['label' => 'Users', 'icon' => 'icon-user', 'route' => 'user', 'parent_id' => null, 'sort' => 6, 'show' => '1'],
+            ['label' => 'Users', 'icon' => 'icon-user', 'route' => 'user', 'parent_id' => null, 'sort' => 7, 'show' => '1'],
             ['label' => 'Create User', 'icon' => 'icon-user-follow', 'route' => 'user.create', 'parent_id' => 15, 'sort' => 1, 'show' => '1'],
             ['label' => 'All', 'icon' => 'icon-users', 'route' => 'user.index', 'parent_id' => 15, 'sort' => 2, 'show' => '1'],
+
+            ['label' => 'Statistic', 'icon' => 'icon-graph ', 'route' => 'idTransaction.statistic', 'parent_id' => null, 'sort' => 5, 'show' => '1,2'],
         ]);
     }
 }

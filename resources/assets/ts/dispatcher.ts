@@ -6,5 +6,6 @@ export default {
     'serial': 'pages/Serial',
     'idPurchase': 'pages/IdPurchases',
     'idTransaction': 'pages/IdTransaction',
-    'users': 'pages/Users'
+    'users': 'pages/Users',
+    'statistic': 'pages/Statistic'
 };
