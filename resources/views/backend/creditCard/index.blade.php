@@ -49,7 +49,8 @@
                         <tr>
                             <th> ID </th>
                             <th> Number</th>
-                            <th> Used</th>
+                            <th> Total add success</th>
+                            <th> Total add fail</th>
                             <th> Actions</th>
                         </tr>
                         </thead>
@@ -61,13 +62,8 @@
                                 <tr class="odd gradeX">
                                     <td>{{ $i->id }}</td>
                                     <td>{{ $i->number }}</td>
-                                    <td>
-                                        @if($i->is_used === 0)
-                                            <span class="badge badge-info badge-roundless"> No </span>
-                                        @else
-                                            <span class="badge badge-default badge-roundless"> Yes </span>
-                                        @endif
-                                    </td>
+                                    <td>{{ $i->total_success }}</td>
+                                    <td>{{ $i->total_fail }}</td>
                                     <td>
                                         <form action="{{ route('creditCard.destroy', $i->id) }}" method="POST">
                                             {{ method_field('DELETE') }}
