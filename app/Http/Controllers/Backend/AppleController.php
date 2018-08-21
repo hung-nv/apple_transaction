@@ -26,6 +26,11 @@ class AppleController extends Controller
         $this->idAppleServices = $services;
     }
 
+    public function getIphoneInformation()
+    {
+        $this->idAppleServices->getIphoneInformation();
+    }
+
     /**
      * @param $user
      * @param $idApple

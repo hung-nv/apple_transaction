@@ -68,6 +68,9 @@
                     <h4 class="block"> Để xóa id đã ngâm</h4>
                     <code>/delete-id-purchase/{user}/{idApple}</code>
 
+                    <h4 class="block"> Để lấy random thông tin (mã mãy, đời máy, model)</h4>
+                    <code>/get-iphone-infor</code>
+
                     <div class="note note-info margin-top-30">
                         <p>
                             user: là username dùng đăng nhập trong admin.<br />

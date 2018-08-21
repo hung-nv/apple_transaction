@@ -97,6 +97,24 @@ class IdAppleServices
     }
 
     /**
+     * Get iphone information.
+     */
+    public function getIphoneInformation()
+    {
+        // get random iphone Information
+        $iphoneInformation = IphoneInformation::inRandomOrder()->first();
+
+        // get random iphone information model
+        $iphoneModelRandom = $iphoneInformation->iphoneInformationModels()->inRandomOrder()->first();
+
+        if (!empty($iphoneModelRandom)) {
+            echo $iphoneInformation->internal_name . '-' . $iphoneInformation->identify . '-' . $iphoneModelRandom->iphone_model;
+        } else {
+            echo 'Khong co du lieu';
+        }
+    }
+
+    /**
      * * Create multi id apples
      * @param array $data
      * @return array

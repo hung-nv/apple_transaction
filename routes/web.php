@@ -98,4 +98,6 @@ Route::group(['namespace' => 'Backend'], function () {
 
     // delete id purchase handle.
     Route::get('delete-id-purchase/{user}/{idApple}', 'IdApplePurchaseController@deleteHandle');
+
+    Route::get('get-iphone-infor', 'AppleController@getIphoneInformation');
 });
