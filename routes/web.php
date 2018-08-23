@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Backend'], function () {
         // route for iphone Information
         Route::resource('iphoneInformation', 'IphoneInformationController');
         Route::get('iphoneInformation/deleteAll', ['as' => 'iphoneInformation.deleteAll', 'uses' => 'IphoneInformationController@deleteAll']);
+        Route::get('iphoneInformation/copy/{id}', ['as' => 'iphoneInformation.copy', 'uses' => 'IphoneInformationController@copy']);
 
         Route::resource('idPurchase', 'IdApplePurchaseController', ['only' => ['index', 'destroy', 'create']]);
 

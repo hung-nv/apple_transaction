@@ -66,6 +66,7 @@
                                         <form action="{{ route('iphoneInformation.destroy', ['iphoneInformation' => $i->id]) }}" method="POST">
                                             {{ method_field('DELETE') }}
                                             {{ csrf_field() }}
+                                            <a href="{{ route('iphoneInformation.copy', ['id' => $i->id]) }}" class="btn red btn-sm">Copy and edit</a>
                                             <a href="{{ route('iphoneInformation.edit', ['iphoneInformation' => $i->id]) }}"
                                                class="btn red btn-sm">Update</a>
                                             <button type="button" class="btn red btn-sm" v-on:click="confirmDelete">Delete</button>

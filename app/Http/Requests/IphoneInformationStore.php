@@ -25,7 +25,7 @@ class IphoneInformationStore extends FormRequest
     {
         return [
             'internal_name' => 'required|unique:iphone_informations,internal_name|max:255',
-            'identify' => 'required|unique:iphone_informations,identify|max:255',
+            'identify' => 'required|max:255',
             'models' => ['required', 'regex:/^(\w|\,|\s)+$/']
         ];
     }

@@ -25,7 +25,7 @@ class IphoneInformationUpdate extends FormRequest
     {
         return [
             'internal_name' => 'max:255|required|unique:iphone_informations,internal_name,'.$this->segment(2),
-            'identify' => 'max:255,required|unique:iphone_informations,identify,'.$this->segment(2),
+            'identify' => 'max:255,required',
             'models' => ['required', 'regex:/^(\w|\,|\s)+$/']
         ];
     }

@@ -25,6 +25,13 @@ class IphoneInformationController extends Controller
         $this->iphoneInformationServices = $services;
     }
 
+    public function copy($id)
+    {
+        $iphoneInformation = $this->iphoneInformationServices->copy($id);
+
+        return redirect()->route('iphoneInformation.edit', ['iphoneInformation' => $iphoneInformation->id]);
+    }
+
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

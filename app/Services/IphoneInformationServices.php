@@ -9,6 +9,30 @@ class IphoneInformationServices
 {
 
     /**
+     * Copy iphone information.
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model
+     */
+    public function copy($id)
+    {
+        $iphoneInformation = IphoneInformation::find($id);
+
+        $newIphoneInformation = $iphoneInformation->replicate();
+
+        $newIphoneInformation->internal_name = 'Copy of ' . $iphoneInformation->internal_name;
+
+        $newIphoneInformation->push();
+
+        foreach ($iphoneInformation->iphoneInformationModels as $i) {
+            $newIphoneInformation->iphoneInformationModels()->create([
+                'iphone_model' => $i->iphone_model
+            ]);
+        }
+
+        return $newIphoneInformation;
+    }
+
+    /**
      * Create iphone Information
      *
      * @param array $data
@@ -197,7 +221,7 @@ class IphoneInformationServices
             $iphoneModelRandom = $iphoneInformation->iphoneInformationModels()->inRandomOrder()->first();
         }
 
-        if(empty($iphoneModelRandom)) {
+        if (empty($iphoneModelRandom)) {
             $responseJson = [
                 'url' => route('iphoneInformation.create'),
                 'message' => 'You need create iPhone Information first.'
